@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://yk51emk7n13i"]
+
+[ext_resource type="Texture2D" uid="uid://dk3qectku48uh" path="res://Assets/Textures/grass.jpg" id="1_c5ube"]
+[ext_resource type="Script" path="res://Assets/Scripts/PlayerScript.gd" id="2_5v36j"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8h8wp"]
+size = Vector2(50, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tn1q3"]
+albedo_texture = ExtResource("1_c5ube")
+uv1_scale = Vector3(2, 2, 2)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wwvgd"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ixc32"]
+
+[node name="World" type="Node3D"]
+
+[node name="Ground" type="CSGMesh3D" parent="."]
+use_collision = true
+mesh = SubResource("PlaneMesh_8h8wp")
+material = SubResource("StandardMaterial3D_tn1q3")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+script = ExtResource("2_5v36j")
+
+[node name="PlayerMesh" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_wwvgd")
+
+[node name="PlayerCollider" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_ixc32")
+
+[node name="PlayerHeadPos" type="Node3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.67264, 0)
+
+[node name="PlayerCamera" type="Camera3D" parent="Player/PlayerHeadPos"]
+fov = 100.0
