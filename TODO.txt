@@ -2,7 +2,7 @@
 
 	(X)     mouselook
 	(X)     stats
-	( )		hud
+	(X)		hud
 	( )     attack sheathing, attacking
 	( )     enemies, attacking, taking damage, killing
 	( )     inventory, items, eating, drinking
@@ -32,7 +32,7 @@
 	( )         spell to be cast displayed in UI
 	( )         spell particles/color shifting
 	( )         spell scrolls that teach you spells
-	( )     crosshair
+	(X)     crosshair
 	( )     add sounds
 	( )         walk loop
 	( )         scroll and book 

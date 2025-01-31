@@ -1,10 +1,5 @@
 extends "Scripts/StatScript.gd"
 
-enum Race{
-	HUMAN, DWARF, SUNELF, FEYELF, HALFELF, DROW, HALFFOOT, GNOME,
-	# TODO: finish enums
-}
-
 func _ready():
 	# TODO: fix debug values to scale off enum
 	

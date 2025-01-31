@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://yk51emk7n13i"]
+[gd_scene load_steps=20 format=3 uid="uid://yk51emk7n13i"]
 
 [ext_resource type="Texture2D" uid="uid://dk3qectku48uh" path="res://Assets/Textures/grass.jpg" id="1_c5ube"]
 [ext_resource type="Script" path="res://Assets/Scripts/MoveScript.gd" id="2_5v36j"]
@@ -12,9 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://b7x7lfpsdu8vp" path="res://Assets/Textures/UI/green.png" id="9_x8o22"]
 [ext_resource type="Texture2D" uid="uid://datwh7mcpgy37" path="res://Assets/Textures/UI/greenBG.png" id="10_chajn"]
 [ext_resource type="Texture2D" uid="uid://dv7lehqygpjxy" path="res://Assets/Textures/UI/empty.png" id="11_5jl34"]
-[ext_resource type="Texture2D" uid="uid://bdryg5yg245wv" path="res://Assets/Textures/UI/cursor.png" id="13_jcnun"]
-[ext_resource type="Texture2D" uid="uid://w3ce6yg6d1bi" path="res://Assets/Textures/Weapons/fist1.png" id="14_owoik"]
-[ext_resource type="Script" path="res://Assets/HitCode.gd" id="15_tcpk1"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_8h8wp"]
 size = Vector2(50, 50)
@@ -81,7 +78,6 @@ size_flags_vertical = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-mouse_filter = 2
 script = ExtResource("5_xdjg6")
 
 [node name="UIHP" type="TextureRect" parent="UI/Bars"]
@@ -161,37 +157,3 @@ offset_top = 962.0
 offset_right = 325.0
 offset_bottom = 1057.0
 texture = ExtResource("11_5jl34")
-
-[node name="Cursor" type="TextureRect" parent="UI"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 932.0
-offset_top = 512.0
-offset_right = 964.0
-offset_bottom = 544.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.5, 0.5)
-mouse_filter = 2
-texture = ExtResource("13_jcnun")
-
-[node name="Weapon" type="TextureRect" parent="UI"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -40.0
-offset_right = 1900.0
-offset_bottom = 1040.0
-grow_horizontal = 2
-grow_vertical = 0
-mouse_filter = 2
-texture = ExtResource("14_owoik")
-script = ExtResource("15_tcpk1")
