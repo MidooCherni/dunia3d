@@ -3,8 +3,8 @@
 	(X)     mouselook
 	(X)     stats
 	(X)		hud
-	( )     attack sheathing, attacking
-	( )     enemies, attacking, taking damage, killing
+	(X)     attack sheathing, attacking
+	(X)     enemies, attacking, taking damage, killing
 	( )     inventory, items, eating, drinking
 	( )         inventory frame
 	( )         inventory array in player code
@@ -57,6 +57,7 @@
 	( )     skill menu
 	( )     proc application
 	( )     spell targeting
+	( )     death
 	( )     actual game content
 	( )     design a cleaner spellbook
 

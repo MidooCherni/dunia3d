@@ -1,5 +1,7 @@
 extends Node
 
+#	base player stat code.. might say fuck it and merge it into PlayerScript
+
 enum Race{
 	HUMAN, DWARF, SUNELF, FEYELF, HALFELF, DROW, HALFFOOT, GNOME,
 	LUNARIAN, SATYR, DRAGONKIN, CENTAUR, MINOTAUR, LEIJIN, VYKOI, APEKIN,
@@ -20,25 +22,35 @@ enum Class{
 	NPC, DEBUG
 }
 
-@onready var STR = 10
-@onready var CON = 10
-@onready var DEX = 10
-@onready var AGI = 10
-@onready var INT = 10
-@onready var WIS = 10
-@onready var CHA = 10
+var charname = "charname"
 
-@onready var max_hp = 1
-@onready var cur_hp = 1
+var STR = 10
+var CON = 10
+var DEX = 10
+var AGI = 10
+var INT = 10
+var WIS = 10
+var CHA = 10
 
-@onready var max_mp = 0
-@onready var cur_mp = 0
+var level = 1
 
-@onready var max_sp = 1
-@onready var cur_sp = 1
+var max_hp = 1
+var cur_hp = 1
 
-@onready var race = Race.DEBUG
-@onready var job = Class.DEBUG
+var max_mp = 0
+var cur_mp = 0
+
+var max_sp = 1
+var cur_sp = 1
+
+var armor = 0
+
+var dmgA = 1
+var dmgB = 4
+var dmgC = 0
+
+var race = Race.DEBUG
+var job = Class.DEBUG
 	
 func _process(_delta):
 	# ensure hp never goes beyond cap

@@ -1,8 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://yk51emk7n13i"]
+[gd_scene load_steps=24 format=3 uid="uid://yk51emk7n13i"]
 
 [ext_resource type="Texture2D" uid="uid://dk3qectku48uh" path="res://Assets/Textures/grass.jpg" id="1_c5ube"]
+[ext_resource type="PackedScene" uid="uid://dni1bd6by4g14" path="res://Assets/Textures/Mobs/mob_goblin.tscn" id="2_0xxop"]
 [ext_resource type="Script" path="res://Assets/Scripts/MoveScript.gd" id="2_5v36j"]
-[ext_resource type="Script" path="res://Assets/Scripts/MobHandler.gd" id="2_87dbl"]
 [ext_resource type="Texture2D" uid="uid://6xurjg1b3sqd" path="res://Assets/Textures/skypano.png" id="3_aooaw"]
 [ext_resource type="Script" path="res://Assets/Scripts/PlayerScript.gd" id="3_bnbgk"]
 [ext_resource type="Texture2D" uid="uid://dlgwm8kejq6cn" path="res://Assets/Textures/UI/red.png" id="5_0mcqv"]
@@ -15,9 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://dv7lehqygpjxy" path="res://Assets/Textures/UI/empty.png" id="11_5jl34"]
 [ext_resource type="Texture2D" uid="uid://bdryg5yg245wv" path="res://Assets/Textures/UI/cursor.png" id="13_jcnun"]
 [ext_resource type="Texture2D" uid="uid://w3ce6yg6d1bi" path="res://Assets/Textures/Weapons/fist1.png" id="14_owoik"]
-[ext_resource type="Texture2D" uid="uid://dqcn8wvjfoo31" path="res://Assets/Textures/UI/pain.png" id="15_imm1g"]
 [ext_resource type="Script" path="res://Assets/Scripts/HitCode.gd" id="15_tcpk1"]
-[ext_resource type="Script" path="res://Assets/Scripts/PainScreen.gd" id="16_8y7rl"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_8h8wp"]
 size = Vector2(50, 50)
@@ -51,7 +49,9 @@ mesh = SubResource("PlaneMesh_8h8wp")
 material = SubResource("StandardMaterial3D_tn1q3")
 
 [node name="NPCTree" type="Node3D" parent="."]
-script = ExtResource("2_87dbl")
+
+[node name="mob_goblin" parent="NPCTree" instance=ExtResource("2_0xxop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27119, -15.7742)
 
 [node name="Player" type="CharacterBody3D" parent="."]
 script = ExtResource("2_5v36j")
@@ -168,12 +168,7 @@ offset_right = 325.0
 offset_bottom = 1057.0
 texture = ExtResource("11_5jl34")
 
-[node name="Static" type="Control" parent="UI"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Cursor" type="TextureRect" parent="UI/Static"]
+[node name="Cursor" type="TextureRect" parent="UI"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -190,15 +185,6 @@ scale = Vector2(0.5, 0.5)
 mouse_filter = 2
 texture = ExtResource("13_jcnun")
 
-[node name="Pain" type="TextureRect" parent="UI/Static"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-mouse_filter = 2
-texture = ExtResource("15_imm1g")
-script = ExtResource("16_8y7rl")
-
 [node name="Weapon" type="TextureRect" parent="UI"]
 layout_mode = 1
 anchors_preset = 7
@@ -207,9 +193,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -20.0
-offset_top = 1040.0
+offset_top = -40.0
 offset_right = 1900.0
-offset_bottom = 2120.0
+offset_bottom = 1040.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2

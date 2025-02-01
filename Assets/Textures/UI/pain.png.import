@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2p411gtvjg2b"
-path="res://.godot/imported/goblin_dead.png-6201b499d1f835a2ac1d3d134b18c2c9.ctex"
+uid="uid://dqcn8wvjfoo31"
+path="res://.godot/imported/pain.png-4ac243f066b2394d8065761a95e0f417.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/Mobs/goblin/goblin_dead.png"
-dest_files=["res://.godot/imported/goblin_dead.png-6201b499d1f835a2ac1d3d134b18c2c9.ctex"]
+source_file="res://Assets/Textures/UI/pain.png"
+dest_files=["res://.godot/imported/pain.png-4ac243f066b2394d8065761a95e0f417.ctex"]
 
 [params]
 
@@ -25,7 +25,7 @@ mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
-process/fix_alpha_border=false
+process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false

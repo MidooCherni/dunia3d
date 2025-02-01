@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cejeht4wxl2cx"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/MobScript.gd" id="1_ayblg"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8m3xc"]
+
+[node name="Creature" type="Sprite3D"]
+billboard = 2
+script = ExtResource("1_ayblg")
+
+[node name="CreatureCollider" type="CSGMesh3D" parent="."]
+transparency = 1.0
+use_collision = true
+mesh = SubResource("CapsuleMesh_8m3xc")

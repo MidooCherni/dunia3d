@@ -1,5 +1,7 @@
 extends Control
 
+#	hud code
+
 @onready var player = $"../../Player/PlayerScripting"
 @onready var hpbar = $UIHP
 @onready var mpbar = $UIMP

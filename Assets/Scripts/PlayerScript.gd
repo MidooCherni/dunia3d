@@ -1,4 +1,6 @@
-extends "Scripts/StatScript.gd"
+extends "StatScript.gd"
+
+#	idk LOOOOOOOOOOOOL
 
 func _ready():
 	# TODO: fix debug values to scale off enum

@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+#	player movement code
+
 const JUMP_VELOCITY = 4.5
 const SENSITIVITY = 0.0015
 
@@ -8,12 +10,13 @@ const SENSITIVITY = 0.0015
 @onready var statcode = $PlayerScripting
 
 var speed = 5.0
+var mousecap = true
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _unhandled_input(event):
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and mousecap:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
@@ -23,6 +26,15 @@ func _physics_process(delta: float) -> void:
 	# fall
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+
+	# capture mouse
+	if Input.is_action_just_pressed("Capture"):
+		if mousecap:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+			mousecap = false
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			mousecap = true
 
 	# jump
 	if Input.is_action_just_pressed("Jump") and is_on_floor():
