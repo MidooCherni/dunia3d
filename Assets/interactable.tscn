@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://brp7q03cfcd7j"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Interactable.gd" id="1_f4imk"]
+
+[node name="Object" type="Node3D"]
+script = ExtResource("1_f4imk")

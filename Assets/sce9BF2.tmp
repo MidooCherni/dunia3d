@@ -1,0 +1,2393 @@
+[gd_scene load_steps=45 format=3 uid="uid://yk51emk7n13i"]
+
+[ext_resource type="Texture2D" uid="uid://dk3qectku48uh" path="res://Assets/Textures/grass.jpg" id="1_c5ube"]
+[ext_resource type="Script" path="res://Assets/Scripts/MapGen.gd" id="1_hlgrj"]
+[ext_resource type="Script" path="res://Assets/Scripts/MoveScript.gd" id="2_5v36j"]
+[ext_resource type="Script" path="res://Assets/Scripts/MobHandler.gd" id="2_87dbl"]
+[ext_resource type="Texture2D" uid="uid://6xurjg1b3sqd" path="res://Assets/Textures/skypano.png" id="3_aooaw"]
+[ext_resource type="Script" path="res://Assets/Scripts/PlayerScript.gd" id="3_bnbgk"]
+[ext_resource type="Texture2D" uid="uid://dlgwm8kejq6cn" path="res://Assets/Textures/UI/red.png" id="5_0mcqv"]
+[ext_resource type="Script" path="res://Assets/Scripts/BarCode.gd" id="5_xdjg6"]
+[ext_resource type="Texture2D" uid="uid://kd8a455oolhi" path="res://Assets/Textures/UI/redBG.png" id="6_1r4ci"]
+[ext_resource type="Texture2D" uid="uid://bbilwcora4stg" path="res://Assets/Textures/UI/blue.png" id="7_7gfd7"]
+[ext_resource type="Texture2D" uid="uid://cb4oglkmj2owt" path="res://Assets/Textures/UI/blueBG.png" id="8_u0qwm"]
+[ext_resource type="Texture2D" uid="uid://b7x7lfpsdu8vp" path="res://Assets/Textures/UI/green.png" id="9_x8o22"]
+[ext_resource type="Texture2D" uid="uid://datwh7mcpgy37" path="res://Assets/Textures/UI/greenBG.png" id="10_chajn"]
+[ext_resource type="Texture2D" uid="uid://dv7lehqygpjxy" path="res://Assets/Textures/UI/empty.png" id="11_5jl34"]
+[ext_resource type="Texture2D" uid="uid://bdryg5yg245wv" path="res://Assets/Textures/UI/cursor.png" id="13_jcnun"]
+[ext_resource type="Texture2D" uid="uid://w3ce6yg6d1bi" path="res://Assets/Textures/Weapons/fist1.png" id="14_owoik"]
+[ext_resource type="Texture2D" uid="uid://cqrnbwskgs7ox" path="res://Assets/Textures/UI/loot_row.png" id="15_e1mh7"]
+[ext_resource type="Script" path="res://Assets/Scripts/LootHolder.gd" id="15_fr3kt"]
+[ext_resource type="Texture2D" uid="uid://dqcn8wvjfoo31" path="res://Assets/Textures/UI/pain.png" id="15_imm1g"]
+[ext_resource type="Script" path="res://Assets/Scripts/HitCode.gd" id="15_tcpk1"]
+[ext_resource type="Script" path="res://Assets/Scripts/PainScreen.gd" id="16_8y7rl"]
+[ext_resource type="Texture2D" uid="uid://cjmoc2lclusmu" path="res://Assets/Textures/UI/loot_glow.png" id="17_2dv11"]
+[ext_resource type="Texture2D" uid="uid://djilp7w37pleg" path="res://Assets/Textures/UI/equipment.png" id="17_iy6a3"]
+[ext_resource type="Script" path="res://Assets/Scripts/MenuHandler.gd" id="17_x8fi7"]
+[ext_resource type="Texture2D" uid="uid://jkcp1w0nqi1a" path="res://Assets/Textures/UI/inventory.png" id="18_iub67"]
+[ext_resource type="Script" path="res://Assets/Scripts/Buttons/ButtInv.gd" id="19_c4blj"]
+[ext_resource type="Texture2D" uid="uid://bpwyael5v2krk" path="res://Assets/Textures/UI/character.png" id="19_idjvl"]
+[ext_resource type="Script" path="res://Assets/Scripts/Buttons/ButtChar.gd" id="20_am7sb"]
+[ext_resource type="Texture2D" uid="uid://bt270lnnj0oqw" path="res://Assets/Textures/UI/skills.png" id="20_qsr5w"]
+[ext_resource type="Texture2D" uid="uid://doblyn7haymek" path="res://Assets/Textures/UI/status.png" id="22_uccjl"]
+[ext_resource type="Script" path="res://Assets/Scripts/Buttons/ButtSkills.gd" id="23_1ng6e"]
+[ext_resource type="Texture2D" uid="uid://dhdv5fbrse03u" path="res://Assets/Textures/UI/frame.png" id="26_5ak6v"]
+[ext_resource type="Texture2D" uid="uid://bamrtawa58hc0" path="res://Assets/Textures/Icons/empty.png" id="26_g2fsw"]
+[ext_resource type="Script" path="res://Assets/Scripts/InvHandler.gd" id="26_luyde"]
+[ext_resource type="Script" path="res://Assets/Scripts/Buttons/InvBtnCode.gd" id="27_j53a5"]
+[ext_resource type="Script" path="res://Assets/Scripts/EquipHandler.gd" id="30_j3qso"]
+[ext_resource type="Script" path="res://Assets/Scripts/DrawMap.gd" id="35_2fjnb"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8h8wp"]
+size = Vector2(50, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tn1q3"]
+albedo_texture = ExtResource("1_c5ube")
+uv1_scale = Vector3(2, 2, 2)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wwvgd"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ixc32"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_fh5w4"]
+panorama = ExtResource("3_aooaw")
+
+[sub_resource type="Sky" id="Sky_q612d"]
+sky_material = SubResource("PanoramaSkyMaterial_fh5w4")
+
+[sub_resource type="Environment" id="Environment_0bpnd"]
+background_mode = 2
+sky = SubResource("Sky_q612d")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+reflected_light_source = 1
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_hlgrj")
+
+[node name="MapMesh" type="CSGMesh3D" parent="."]
+visible = false
+use_collision = true
+mesh = SubResource("PlaneMesh_8h8wp")
+material = SubResource("StandardMaterial3D_tn1q3")
+
+[node name="TileTree" type="Node3D" parent="."]
+
+[node name="NPCTree" type="Node3D" parent="."]
+script = ExtResource("2_87dbl")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+script = ExtResource("2_5v36j")
+
+[node name="PlayerScripting" type="Node3D" parent="Player"]
+script = ExtResource("3_bnbgk")
+
+[node name="PlayerMesh" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_wwvgd")
+
+[node name="PlayerCollider" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_ixc32")
+
+[node name="PlayerHeadPos" type="Node3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.67264, 0)
+
+[node name="PlayerCamera" type="Camera3D" parent="Player/PlayerHeadPos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000920296, -0.0386639, 0.00974274)
+environment = SubResource("Environment_0bpnd")
+fov = 100.0
+
+[node name="PlayerFootsteps" type="AudioStreamPlayer" parent="Player"]
+
+[node name="UI" type="Control" parent="."]
+z_index = 2
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Bars" type="Control" parent="UI"]
+z_index = 2
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+script = ExtResource("5_xdjg6")
+
+[node name="UIHP" type="TextureRect" parent="UI/Bars"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = 950.0
+offset_right = 220.0
+offset_bottom = 990.0
+grow_vertical = 2
+scale = Vector2(1.5, 0.5)
+texture = ExtResource("5_0mcqv")
+
+[node name="UIHPBG" type="TextureRect" parent="UI/Bars"]
+z_index = -1
+layout_mode = 0
+offset_left = 20.0
+offset_top = 970.0
+offset_right = 220.0
+offset_bottom = 1010.0
+scale = Vector2(1.5, 0.5)
+texture = ExtResource("6_1r4ci")
+
+[node name="UIMP" type="TextureRect" parent="UI/Bars"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = 980.0
+offset_right = 220.0
+offset_bottom = 1020.0
+grow_vertical = 2
+scale = Vector2(1.5, 0.5)
+texture = ExtResource("7_7gfd7")
+
+[node name="UIMPBG" type="TextureRect" parent="UI/Bars"]
+z_index = -1
+layout_mode = 0
+offset_left = 20.0
+offset_top = 1000.0
+offset_right = 220.0
+offset_bottom = 1040.0
+scale = Vector2(1.5, 0.5)
+texture = ExtResource("8_u0qwm")
+
+[node name="UISP" type="TextureRect" parent="UI/Bars"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = 1010.0
+offset_right = 220.0
+offset_bottom = 1050.0
+grow_vertical = 2
+scale = Vector2(1.5, 0.5)
+texture = ExtResource("9_x8o22")
+
+[node name="UISPBG" type="TextureRect" parent="UI/Bars"]
+z_index = -1
+layout_mode = 0
+offset_left = 20.0
+offset_top = 1030.0
+offset_right = 220.0
+offset_bottom = 1070.0
+scale = Vector2(1.5, 0.5)
+texture = ExtResource("10_chajn")
+
+[node name="BarBG" type="TextureRect" parent="UI/Bars"]
+z_index = -2
+layout_mode = 0
+offset_left = 15.0
+offset_top = 962.0
+offset_right = 325.0
+offset_bottom = 1057.0
+texture = ExtResource("11_5jl34")
+
+[node name="Static" type="Control" parent="UI"]
+z_index = 2
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Cursor" type="TextureRect" parent="UI/Static"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 932.0
+offset_top = 512.0
+offset_right = 964.0
+offset_bottom = 544.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("13_jcnun")
+
+[node name="LootHolder" type="Control" parent="UI/Static/Cursor"]
+anchors_preset = 0
+offset_left = 50.0
+offset_top = -40.0
+offset_right = 90.0
+scale = Vector2(2.5, 2.5)
+script = ExtResource("15_fr3kt")
+
+[node name="LootRow" type="TextureRect" parent="UI/Static/Cursor/LootHolder"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("15_e1mh7")
+
+[node name="LootIcon" type="TextureRect" parent="UI/Static/Cursor/LootHolder/LootRow"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 43.0
+offset_bottom = 43.0
+
+[node name="LootLabel" type="Label" parent="UI/Static/Cursor/LootHolder/LootRow"]
+z_index = 2
+layout_mode = 0
+offset_left = 50.0
+offset_top = 12.0
+offset_right = 249.0
+offset_bottom = 40.0
+scale = Vector2(0.8, 0.8)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_constants/shadow_outline_size = 16
+theme_override_font_sizes/font_size = 32
+text = "example example"
+vertical_alignment = 2
+
+[node name="LootGlow" type="TextureRect" parent="UI/Static/Cursor/LootHolder/LootRow"]
+layout_mode = 0
+offset_right = 262.0
+offset_bottom = 46.0
+texture = ExtResource("17_2dv11")
+
+[node name="LootRow2" type="TextureRect" parent="UI/Static/Cursor/LootHolder"]
+layout_mode = 0
+offset_top = 40.0
+offset_right = 262.0
+offset_bottom = 86.0
+texture = ExtResource("15_e1mh7")
+
+[node name="LootIcon" type="TextureRect" parent="UI/Static/Cursor/LootHolder/LootRow2"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 43.0
+offset_bottom = 43.0
+
+[node name="LootLabel" type="Label" parent="UI/Static/Cursor/LootHolder/LootRow2"]
+z_index = 2
+layout_mode = 0
+offset_left = 50.0
+offset_top = 12.0
+offset_right = 249.0
+offset_bottom = 40.0
+scale = Vector2(0.8, 0.8)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_constants/shadow_outline_size = 16
+theme_override_font_sizes/font_size = 32
+text = "example example"
+vertical_alignment = 2
+
+[node name="LootGlow" type="TextureRect" parent="UI/Static/Cursor/LootHolder/LootRow2"]
+layout_mode = 0
+offset_right = 262.0
+offset_bottom = 46.0
+texture = ExtResource("17_2dv11")
+
+[node name="LootRow3" type="TextureRect" parent="UI/Static/Cursor/LootHolder"]
+layout_mode = 0
+offset_top = 80.0
+offset_right = 262.0
+offset_bottom = 126.0
+texture = ExtResource("15_e1mh7")
+
+[node name="LootIcon" type="TextureRect" parent="UI/Static/Cursor/LootHolder/LootRow3"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 43.0
+offset_bottom = 43.0
+
+[node name="LootLabel" type="Label" parent="UI/Static/Cursor/LootHolder/LootRow3"]
+z_index = 2
+layout_mode = 0
+offset_left = 50.0
+offset_top = 12.0
+offset_right = 249.0
+offset_bottom = 40.0
+scale = Vector2(0.8, 0.8)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_constants/shadow_outline_size = 16
+theme_override_font_sizes/font_size = 32
+text = "example example"
+vertical_alignment = 2
+
+[node name="LootGlow" type="TextureRect" parent="UI/Static/Cursor/LootHolder/LootRow3"]
+layout_mode = 0
+offset_right = 262.0
+offset_bottom = 46.0
+texture = ExtResource("17_2dv11")
+
+[node name="LootRow4" type="TextureRect" parent="UI/Static/Cursor/LootHolder"]
+layout_mode = 0
+offset_top = 120.0
+offset_right = 262.0
+offset_bottom = 166.0
+texture = ExtResource("15_e1mh7")
+
+[node name="LootIcon" type="TextureRect" parent="UI/Static/Cursor/LootHolder/LootRow4"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 43.0
+offset_bottom = 43.0
+
+[node name="LootLabel" type="Label" parent="UI/Static/Cursor/LootHolder/LootRow4"]
+z_index = 2
+layout_mode = 0
+offset_left = 50.0
+offset_top = 12.0
+offset_right = 249.0
+offset_bottom = 40.0
+scale = Vector2(0.8, 0.8)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_constants/shadow_outline_size = 16
+theme_override_font_sizes/font_size = 32
+text = "example example"
+vertical_alignment = 2
+
+[node name="LootGlow" type="TextureRect" parent="UI/Static/Cursor/LootHolder/LootRow4"]
+layout_mode = 0
+offset_right = 262.0
+offset_bottom = 46.0
+texture = ExtResource("17_2dv11")
+
+[node name="LootRow5" type="TextureRect" parent="UI/Static/Cursor/LootHolder"]
+layout_mode = 0
+offset_top = 160.0
+offset_right = 262.0
+offset_bottom = 206.0
+texture = ExtResource("15_e1mh7")
+
+[node name="LootIcon" type="TextureRect" parent="UI/Static/Cursor/LootHolder/LootRow5"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 43.0
+offset_bottom = 43.0
+
+[node name="LootLabel" type="Label" parent="UI/Static/Cursor/LootHolder/LootRow5"]
+z_index = 2
+layout_mode = 0
+offset_left = 50.0
+offset_top = 12.0
+offset_right = 249.0
+offset_bottom = 40.0
+scale = Vector2(0.8, 0.8)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_constants/shadow_outline_size = 16
+theme_override_font_sizes/font_size = 32
+text = "example example"
+vertical_alignment = 2
+
+[node name="LootGlow" type="TextureRect" parent="UI/Static/Cursor/LootHolder/LootRow5"]
+layout_mode = 0
+offset_right = 262.0
+offset_bottom = 46.0
+texture = ExtResource("17_2dv11")
+
+[node name="Pain" type="TextureRect" parent="UI/Static"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource("15_imm1g")
+script = ExtResource("16_8y7rl")
+
+[node name="Menus" type="Control" parent="UI"]
+z_index = 2
+texture_filter = 2
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("17_x8fi7")
+
+[node name="CursorLabel" type="Label" parent="UI/Menus"]
+z_index = 2
+layout_mode = 0
+offset_top = 100.0
+offset_right = 199.0
+offset_bottom = 128.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_constants/shadow_outline_size = 16
+theme_override_font_sizes/font_size = 32
+text = "example example"
+vertical_alignment = 2
+
+[node name="CursorItem" type="TextureRect" parent="UI/Menus"]
+layout_mode = 0
+offset_top = 100.0
+offset_right = 48.0
+offset_bottom = 148.0
+
+[node name="ButtInv" type="Button" parent="UI/Menus"]
+z_index = 1
+layout_mode = 0
+offset_left = 580.0
+offset_top = 305.0
+offset_right = 740.0
+offset_bottom = 351.0
+scale = Vector2(1.2, 1.2)
+icon = ExtResource("18_iub67")
+script = ExtResource("19_c4blj")
+
+[node name="ButtChar" type="Button" parent="UI/Menus"]
+z_index = 1
+layout_mode = 0
+offset_left = 780.0
+offset_top = 305.0
+offset_right = 940.0
+offset_bottom = 351.0
+scale = Vector2(1.2, 1.2)
+icon = ExtResource("19_idjvl")
+script = ExtResource("20_am7sb")
+
+[node name="ButtSkills" type="Button" parent="UI/Menus"]
+z_index = 1
+layout_mode = 0
+offset_left = 980.0
+offset_top = 305.0
+offset_right = 1140.0
+offset_bottom = 351.0
+scale = Vector2(1.2, 1.2)
+icon = ExtResource("20_qsr5w")
+script = ExtResource("23_1ng6e")
+
+[node name="FrameInventory" type="TextureRect" parent="UI/Menus"]
+layout_mode = 0
+offset_top = 100.0
+offset_right = 1920.0
+offset_bottom = 1180.0
+mouse_filter = 2
+texture = ExtResource("17_iy6a3")
+
+[node name="Paperdoll" type="TextureRect" parent="UI/Menus/FrameInventory"]
+z_index = -1
+layout_mode = 0
+offset_left = 1150.0
+offset_top = 354.0
+offset_right = 1233.0
+offset_bottom = 557.0
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("26_5ak6v")
+
+[node name="InvButtCont" type="Control" parent="UI/Menus/FrameInventory"]
+anchors_preset = 0
+offset_left = 595.0
+offset_top = 310.0
+offset_right = 635.0
+offset_bottom = 350.0
+scale = Vector2(1.2, 1.2)
+mouse_filter = 2
+script = ExtResource("26_luyde")
+
+[node name="Inv01" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv01"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv02" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 50.0
+offset_right = 98.0
+offset_bottom = 48.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv02"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv03" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 100.0
+offset_right = 148.0
+offset_bottom = 48.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv03"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv04" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 150.0
+offset_right = 198.0
+offset_bottom = 48.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv04"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv05" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 200.0
+offset_right = 248.0
+offset_bottom = 48.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv05"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv06" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 250.0
+offset_right = 298.0
+offset_bottom = 48.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv06"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv07" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 300.0
+offset_right = 348.0
+offset_bottom = 48.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv07"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv08" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_top = 50.0
+offset_right = 48.0
+offset_bottom = 98.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv08"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv09" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 98.0
+offset_bottom = 98.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv09"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv10" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 50.0
+offset_right = 148.0
+offset_bottom = 98.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv10"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv11" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 50.0
+offset_right = 198.0
+offset_bottom = 98.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv11"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv12" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 50.0
+offset_right = 248.0
+offset_bottom = 98.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv12"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv13" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 50.0
+offset_right = 298.0
+offset_bottom = 98.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv13"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv14" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 50.0
+offset_right = 348.0
+offset_bottom = 98.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv14"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv15" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_top = 100.0
+offset_right = 48.0
+offset_bottom = 148.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv15"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv16" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 100.0
+offset_right = 98.0
+offset_bottom = 148.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv16"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv17" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 100.0
+offset_right = 148.0
+offset_bottom = 148.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv17"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv18" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 100.0
+offset_right = 198.0
+offset_bottom = 148.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv18"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv19" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 100.0
+offset_right = 248.0
+offset_bottom = 148.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv19"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv20" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 100.0
+offset_right = 298.0
+offset_bottom = 148.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv20"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv21" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 100.0
+offset_right = 348.0
+offset_bottom = 148.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv21"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv22" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_top = 150.0
+offset_right = 48.0
+offset_bottom = 198.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv22"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv23" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 150.0
+offset_right = 98.0
+offset_bottom = 198.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv23"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv24" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 150.0
+offset_right = 148.0
+offset_bottom = 198.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv24"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv25" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 150.0
+offset_right = 198.0
+offset_bottom = 198.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv25"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv26" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 150.0
+offset_right = 248.0
+offset_bottom = 198.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv26"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv27" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 150.0
+offset_right = 298.0
+offset_bottom = 198.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv27"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv28" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 150.0
+offset_right = 348.0
+offset_bottom = 198.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv28"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv29" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_top = 200.0
+offset_right = 48.0
+offset_bottom = 248.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv29"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv30" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 200.0
+offset_right = 98.0
+offset_bottom = 248.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv30"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv31" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 200.0
+offset_right = 148.0
+offset_bottom = 248.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv31"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv32" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 200.0
+offset_right = 198.0
+offset_bottom = 248.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv32"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv33" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 200.0
+offset_right = 248.0
+offset_bottom = 248.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv33"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv34" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 200.0
+offset_right = 298.0
+offset_bottom = 248.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv34"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv35" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 200.0
+offset_right = 348.0
+offset_bottom = 248.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv35"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv36" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_top = 250.0
+offset_right = 48.0
+offset_bottom = 298.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv36"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv37" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 250.0
+offset_right = 98.0
+offset_bottom = 298.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv37"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv38" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 250.0
+offset_right = 148.0
+offset_bottom = 298.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv38"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv39" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 250.0
+offset_right = 198.0
+offset_bottom = 298.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv39"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv40" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 250.0
+offset_right = 248.0
+offset_bottom = 298.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv40"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv41" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 250.0
+offset_right = 298.0
+offset_bottom = 298.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv41"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Inv42" type="Button" parent="UI/Menus/FrameInventory/InvButtCont"]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 250.0
+offset_right = 348.0
+offset_bottom = 298.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/FrameInventory/InvButtCont/Inv42"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="InvSounds" type="AudioStreamPlayer" parent="UI/Menus/FrameInventory"]
+
+[node name="FrameCharSkills" type="TextureRect" parent="UI/Menus"]
+visible = false
+layout_mode = 0
+offset_top = 100.0
+offset_right = 1920.0
+offset_bottom = 1180.0
+mouse_filter = 2
+texture = ExtResource("22_uccjl")
+
+[node name="Paperdoll" type="TextureRect" parent="UI/Menus/FrameCharSkills"]
+z_index = -1
+layout_mode = 0
+offset_left = 1150.0
+offset_top = 354.0
+offset_right = 1233.0
+offset_bottom = 557.0
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("26_5ak6v")
+
+[node name="EquipSlots" type="Control" parent="UI/Menus"]
+anchors_preset = 0
+offset_left = 1050.0
+offset_top = 350.0
+offset_right = 1090.0
+offset_bottom = 390.0
+scale = Vector2(1.2, 1.2)
+mouse_filter = 2
+
+[node name="EquipSlotsGrp" type="Control" parent="UI/Menus/EquipSlots"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+script = ExtResource("30_j3qso")
+
+[node name="SlotWeapon" type="Button" parent="UI/Menus/EquipSlots/EquipSlotsGrp"]
+layout_mode = 0
+offset_left = 85.9999
+offset_top = 338.0
+offset_right = 134.0
+offset_bottom = 386.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/EquipSlots/EquipSlotsGrp/SlotWeapon"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="SlotArmor" type="Button" parent="UI/Menus/EquipSlots/EquipSlotsGrp"]
+layout_mode = 0
+offset_left = 35.9999
+offset_top = 88.0
+offset_right = 83.9999
+offset_bottom = 136.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/EquipSlots/EquipSlotsGrp/SlotArmor"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="SlotRing1" type="Button" parent="UI/Menus/EquipSlots/EquipSlotsGrp"]
+layout_mode = 0
+offset_left = 35.9999
+offset_top = 288.0
+offset_right = 83.9999
+offset_bottom = 336.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/EquipSlots/EquipSlotsGrp/SlotRing1"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="SlotRing2" type="Button" parent="UI/Menus/EquipSlots/EquipSlotsGrp"]
+layout_mode = 0
+offset_left = 186.0
+offset_top = 288.0
+offset_right = 234.0
+offset_bottom = 336.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/EquipSlots/EquipSlotsGrp/SlotRing2"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="SlotOffhand" type="Button" parent="UI/Menus/EquipSlots/EquipSlotsGrp"]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 338.0
+offset_right = 184.0
+offset_bottom = 386.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/EquipSlots/EquipSlotsGrp/SlotOffhand"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="SlotHead" type="Button" parent="UI/Menus/EquipSlots/EquipSlotsGrp"]
+layout_mode = 0
+offset_left = 85.9999
+offset_top = 38.0
+offset_right = 134.0
+offset_bottom = 86.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/EquipSlots/EquipSlotsGrp/SlotHead"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="SlotNeck" type="Button" parent="UI/Menus/EquipSlots/EquipSlotsGrp"]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 38.0
+offset_right = 184.0
+offset_bottom = 86.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/EquipSlots/EquipSlotsGrp/SlotNeck"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="SlotBack" type="Button" parent="UI/Menus/EquipSlots/EquipSlotsGrp"]
+layout_mode = 0
+offset_left = 186.0
+offset_top = 88.0
+offset_right = 234.0
+offset_bottom = 136.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/EquipSlots/EquipSlotsGrp/SlotBack"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="SlotHands" type="Button" parent="UI/Menus/EquipSlots/EquipSlotsGrp"]
+layout_mode = 0
+offset_left = 186.0
+offset_top = 138.0
+offset_right = 234.0
+offset_bottom = 186.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/EquipSlots/EquipSlotsGrp/SlotHands"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="SlotWaist" type="Button" parent="UI/Menus/EquipSlots/EquipSlotsGrp"]
+layout_mode = 0
+offset_left = 35.9999
+offset_top = 138.0
+offset_right = 83.9999
+offset_bottom = 186.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/EquipSlots/EquipSlotsGrp/SlotWaist"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="SlotFeet" type="Button" parent="UI/Menus/EquipSlots/EquipSlotsGrp"]
+layout_mode = 0
+offset_left = 35.9999
+offset_top = 238.0
+offset_right = 83.9999
+offset_bottom = 286.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/EquipSlots/EquipSlotsGrp/SlotFeet"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="SlotAmmo" type="Button" parent="UI/Menus/EquipSlots/EquipSlotsGrp"]
+layout_mode = 0
+offset_left = 186.0
+offset_top = 238.0
+offset_right = 234.0
+offset_bottom = 286.0
+action_mode = 0
+button_mask = 3
+icon = ExtResource("26_g2fsw")
+flat = true
+alignment = 2
+clip_text = true
+icon_alignment = 1
+text_direction = 2
+script = ExtResource("27_j53a5")
+
+[node name="Label" type="RichTextLabel" parent="UI/Menus/EquipSlots/EquipSlotsGrp/SlotAmmo"]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 70.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+text_direction = 2
+
+[node name="Map" type="Control" parent="UI"]
+texture_filter = 1
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("35_2fjnb")
+
+[node name="Weapon" type="TextureRect" parent="UI"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = 1040.0
+offset_right = 1900.0
+offset_bottom = 2120.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("14_owoik")
+script = ExtResource("15_tcpk1")
+
+[node name="WeaponSfx" type="AudioStreamPlayer" parent="UI/Weapon"]
+max_polyphony = 8

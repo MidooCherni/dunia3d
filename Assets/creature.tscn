@@ -6,6 +6,7 @@
 
 [node name="Creature" type="Sprite3D"]
 billboard = 2
+texture_filter = 4
 script = ExtResource("1_ayblg")
 
 [node name="CreatureCollider" type="CSGMesh3D" parent="."]

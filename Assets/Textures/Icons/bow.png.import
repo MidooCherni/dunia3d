@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sk6d061sv1dc"
-path="res://.godot/imported/luna.png-2fd10b16812991bd2e3e48639550ec9a.ctex"
+uid="uid://bcfxob4exsmaa"
+path="res://.godot/imported/bow.png-6fc7a78fceea6943eb1bb0b5293477bc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://luna.png"
-dest_files=["res://.godot/imported/luna.png-2fd10b16812991bd2e3e48639550ec9a.ctex"]
+source_file="res://Assets/Textures/Icons/bow.png"
+dest_files=["res://.godot/imported/bow.png-6fc7a78fceea6943eb1bb0b5293477bc.ctex"]
 
 [params]
 

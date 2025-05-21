@@ -9,20 +9,26 @@ enum Type{
 }
 
 enum State{
-	IDLE, AGGRO, CHASING, WINDING, RECOVERING, STUNNED, DEAD
+	IDLE, DEAD, CHASING, WINDING, RECOVERING, STUNNED, ASLEEP, AGGRO
 }
 
 @onready var player = get_node("../../Player")
 @onready var playerStats = get_node("../../Player/PlayerScripting")
 @onready var paincode = get_node("../../UI/Static/Pain")
+@onready var mapgen = get_node("../..")
 var mobname = "debugman"
 var state = State.IDLE
 var oldState = State.AGGRO
 var aggressive = false
+var last_player_pos = null
 var attacktimer = 0
 var attacktimerMax = 15
 var freezetimer = 0
 var freezetimerMax = 10
+var deathtimer = 30
+
+var potentialdrops = []
+var contents = []
 
 var STR = 10
 var CON = 10
@@ -71,6 +77,80 @@ var myheight
 
 var rng = RandomNumberGenerator.new()
 
+func roll_possessions():
+	if potentialdrops.size() == 0: return
+	for loot_table in potentialdrops:
+		var dice = rng.randi_range(0, 100)
+		if dice <= loot_table[1]:
+			var dice2 = rng.randi_range(0, loot_table[0].size()-1)
+			contents.append(loot_table[0][dice2])
+
+#pathfinding code
+func is_walkable(world_x, world_y):
+	var x = int(world_x / 2)
+	var y = int(world_y / 2)
+	if x < 0 or x >= mapgen.FLOOR_MAX_TILES or y < 0 or y >= mapgen.FLOOR_MAX_TILES:
+		return false
+	return mapgen.grid[x][y] in ['|', '.', '-']
+
+func get_neighbors(world_pos):
+	var dirs = [Vector2(0, -2), Vector2(0, 2), Vector2(-2, 0), Vector2(2, 0)]
+	var neighbors = []
+	for dir in dirs:
+		var new_pos = world_pos + dir
+		if is_walkable(new_pos.x, new_pos.y):
+			neighbors.append(new_pos)
+	return neighbors
+
+func find_path(start_world, goal_world):
+	var frontier = []
+	var came_from = {}
+	frontier.append(start_world)
+	came_from[start_world] = null
+	while frontier.size() > 0:
+		var current = frontier.pop_front()
+		if current == goal_world:
+			break
+		for next in get_neighbors(current):
+			if not came_from.has(next):
+				frontier.append(next)
+				came_from[next] = current
+	var path = []
+	var current = goal_world
+	while current != null:
+		path.insert(0, current)
+		current = came_from.get(current, null)
+	if path.size() > 0 and path[0] == start_world:
+		path.remove_at(0)
+	return path
+
+func has_line_of_sight(wx0, wy0, wx1, wy1):
+	var x0 = int(wx0 / 2)
+	var y0 = int(wy0 / 2)
+	var x1 = int(wx1 / 2)
+	var y1 = int(wy1 / 2)
+	var dx = abs(x1 - x0)
+	var dy = abs(y1 - y0)
+	var sx = -1
+	if x0 < x1: sx = 1
+	var sy = -1
+	if y0 < y1: sy = 1
+	var err = dx - dy
+	while true:
+		if mapgen.grid[x0][y0] != '.':
+			return false
+		if x0 == x1 and y0 == y1:
+			break
+		var e2 = 2 * err
+		if e2 > -dy:
+			err -= dy
+			x0 += sx
+		if e2 < dx:
+			err += dx
+			y0 += sy
+	return true
+	
+#etc
 func _ready() -> void:
 	_tex_idle = load(tex_idle)
 	_tex_run1 = load(tex_run1)
@@ -90,23 +170,34 @@ func _ready() -> void:
 	myheight = texture.get_height() / 200.0
 	if aggressive: state = State.AGGRO
 	
-func _process(delta):
+func _physics_process(delta):
 	# check in aggro range and chase player
 	match state:
 		State.AGGRO:
-			if global_position.distance_to(player.global_position) <= 10.0:
+			if global_position.distance_to(player.global_position) <= 20.0:
 				# TODO: check not rooted or stunned
-				state = State.CHASING
+				if has_line_of_sight(position.x, position.z, player.tile(player.position.x), player.tile(player.position.z)):
+					last_player_pos = [player.tile(player.position.x), player.tile(player.position.z)]
+					state = State.CHASING
+				elif last_player_pos != null:
+					global_position = global_position.move_toward(Vector3(last_player_pos[0], player.position.y+myheight, last_player_pos[1]), delta * (float(AGI)/2))
 		State.CHASING:
-			if int(global_position.distance_to(player.global_position)) % 2 == 0:
-				texture = _tex_run1
-			else:
-				texture = _tex_run2
 			if global_position.distance_to(player.global_position) > 2.0:
+				var mpos = Vector2(position.x, position.z)
+				var ppos = Vector2(player.tile(player.position.x), player.tile(player.position.z))
+				if has_line_of_sight(position.x, position.z, player.tile(player.position.x), player.tile(player.position.z)):
+					var path = find_path(mpos, ppos)
+					if path.size() > 0:
+						var next = path[0]
+						global_position = global_position.move_toward(Vector3(next.x, player.position.y+myheight, next.y), delta * (float(AGI)/2))
+				if int(global_position.distance_to(player.global_position)) % 2 == 0:
+					texture = _tex_run1
+				else:
+					texture = _tex_run2
 				# TODO: more sophisticated pathfinding algorithm
-				var playerpos = Vector3(player.global_position.x, \
-					myheight+player.global_position.y, player.global_position.z)
-				global_position = global_position.move_toward(playerpos, delta * (float(AGI)/2))
+				#var playerpos = Vector3(player.global_position.x, \
+				#	myheight+player.global_position.y, player.global_position.z)
+				#global_position = global_position.move_toward(playerpos, delta * (float(AGI)/2))
 			else:
 				state = State.WINDING
 		State.WINDING:
@@ -135,6 +226,9 @@ func _process(delta):
 				state = State.AGGRO
 		State.DEAD:
 			texture = _tex_dead
+			if contents.size() == 0:
+				deathtimer -= 1
+				if deathtimer == 0: queue_free()
 	
 	# ensure hp never goes beyond cap
 	if cur_hp > max_hp: cur_hp = max_hp

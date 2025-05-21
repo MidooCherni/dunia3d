@@ -2,26 +2,56 @@
 
 	(X)     mouselook
 	(X)     stats
-	(X)		hud
+	(X)     hud
 	(X)     attack sheathing, attacking
 	(X)     enemies, attacking, taking damage, killing
-	( )     inventory, items, eating, drinking
-	( )         inventory frame
-	( )         inventory array in player code
-	( )         invisible blocks in inventory frame 
-	( )         inventory code that tracks grids and renders inventory on them every time it's opened
-	( )         right clicking grid item uses it directly then re-renders inventory grids
-	( )         quantity label on items with more than 1 qty
-	( )         info box on hover with a square
-	( )     equipment, wearing shit, hud weapon models
-	( )         player code has 18 equipment slots each assigned to a clickable square
-	( )         wear() and unwear() functions that affect player stats and change weapon model onscreen
-	( )         right clicking gear will put it on, right clicking a slot will try to empty it
+	(X)     inventory, items, eating, drinking
+	(X)         inventory frame
+	(X)         inventory array in player code
+	(X)         invisible blocks in inventory frame 
+	(X)         inventory code that tracks grids and renders inventory on them every time it's opened
+	(X)         right clicking grid item uses it directly then re-renders inventory grids
+	(X)         quantity label on items with more than 1 qty
+	(X)         info box on hover with a square
+	(X)     equipment, wearing shit, hud weapon models
+	(X)         player code has 18 equipment slots each assigned to a clickable square
+	(X)         wear() and unwear() functions that affect player stats and change weapon model onscreen
+	(X)         right clicking gear will put it on, right clicking a slot will try to empty it
+	(X)     crosshair
+	(X)     add sounds
+	(X)         walk loop
+	(X)         scroll and book 
+	(X)         eat and drink
+	(X)         sheathe and unsheathe
+	(X)         punch, stab, slash, crush
+	(X)     ranged weapons
+	(X)     lootable enemies
+	(X)     grid map
+	(X)     map generation
+	(X)     interactable objects (chests doors)
+	(X)     randomly generated wall decoration
+	( )     floors and floor transition
+	( )     randomly generating enemies in rooms, doodads and goodies
+	( )     stat menu
+	( )     bob and weave
+	( )     maps, loading areas
+	( )     npcs, conversation menus, portraits
+	( )     party members
+	( )     cursor dragging items and clickable paperdoll 
+	( )     character creation, races, classes, starter stats, saving and loading
+	( )     hunger and thirst
+	( )     item description on alt click
+	( )     make all the skills and spell flags functional (+weapon calculation fix and todo cleanup)
+	( )     skill menu
+	( )     proc application
+	( )     spell targeting
+	( )     death
 	( )     spells, magic sheathing, casting 
 	( )         player.equippedspell value
 	( )         boolean spell isLearned value
 	( )         spellFamily array that links to similar spells
 	( )         spellbook that allows choosing equippedspell 
+	( )         all spell sounds 
 	( )         pressing 1-9 while hovering over a spell allows binding it 
 	( )         add silence, stunned flags
 	( )         Buff array in stat handler that has id, element, ticks (bool), and timeleft
@@ -31,38 +61,10 @@
 	( )             duration = 0, switch case through effecttype of each effect and Cast()
 	( )         spell to be cast displayed in UI
 	( )         spell particles/color shifting
-	( )         spell scrolls that teach you spells
-	(X)     crosshair
-	( )     add sounds
-	( )         walk loop
-	( )         scroll and book 
-	( )         eat and drink
-	( )         all spell sounds 
-	( )         sheathe and unsheathe
-	( )         punch, stab, slash, crush
-	( )     ranged weapons
-	( )     lootable enemies
-	( )     interactable objects (chests doors zonedoors plants)
-	( )     npcs, conversation menus, portraits
-	( )     party members
-	( )     stat menu
-	( )     cursor dragging items and clickable paperdoll 
-	( )     mob directions and face sprites
-	( )     simple pathfinding
-	( )     maps, loading areas
-	( )     character creation, races, classes, starter stats, saving and loading
-	( )     hunger and thirst
-	( )     item description on alt click
-	( )     make all the skills and spell flags functional (+weapon calculation fix and todo cleanup)
-	( )     skill menu
-	( )     proc application
-	( )     spell targeting
-	( )     death
+	( )         spell books that teach you spells
+	( )     wands that shoot spells
+	( )     pause on any menu
+	( )     no footsteps when jumping
+	( )     overworld travel
+	( )     code cleanup, factorisation into functions, clearer variables, smooth handling
 	( )     actual game content
-	( )     design a cleaner spellbook
-
-
-
-	HP, MP, SP, XP, armor   int     2,147,483,647
-	item, spell, buff ids   short   32,767
-	stats, skills           byte    255
