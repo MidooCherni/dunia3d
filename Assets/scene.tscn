@@ -107,7 +107,6 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-scale = Vector2(0.45, 0.45)
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -406,6 +405,23 @@ layout_mode = 0
 offset_right = 262.0
 offset_bottom = 46.0
 texture = ExtResource("17_2dv11")
+
+[node name="LootLabel" type="Label" parent="UI/Static/Cursor"]
+z_index = 2
+layout_mode = 0
+offset_left = -485.0
+offset_top = -90.0
+offset_right = 15.0
+offset_bottom = -62.0
+scale = Vector2(2, 2)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_constants/shadow_outline_size = 16
+theme_override_font_sizes/font_size = 32
+text = " "
+horizontal_alignment = 1
+vertical_alignment = 2
 
 [node name="Pain" type="TextureRect" parent="UI/Static"]
 self_modulate = Color(1, 1, 1, 0)

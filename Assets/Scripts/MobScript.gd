@@ -27,6 +27,8 @@ var freezetimer = 0
 var freezetimerMax = 10
 var deathtimer = 30
 
+var lifetime = 0
+
 var potentialdrops = []
 var contents = []
 
@@ -151,27 +153,8 @@ func has_line_of_sight(wx0, wy0, wx1, wy1):
 	return true
 	
 #etc
-func _ready() -> void:
-	_tex_idle = load(tex_idle)
-	_tex_run1 = load(tex_run1)
-	_tex_run2 = load(tex_run2)
-	_tex_wind = load(tex_wind)
-	_tex_strike = load(tex_strike)
-	_tex_hit = load(tex_hit)
-	_tex_dead = load(tex_dead)
-		
-	# (CON modifier + 8) * level
-	max_hp = (((CON / 2) - 5) + 8) * level
-	cur_hp = max_hp
-	if INT > 9:
-		max_mp = (INT / 2) + (2 * level)
-		cur_mp = max_mp
-	texture = _tex_idle
-	myheight = texture.get_height() / 200.0
-	if aggressive: state = State.AGGRO
-	
-func _physics_process(delta):
-	# check in aggro range and chase player
+
+func check_ai(delta):
 	match state:
 		State.AGGRO:
 			if global_position.distance_to(player.global_position) <= 20.0:
@@ -183,21 +166,16 @@ func _physics_process(delta):
 					global_position = global_position.move_toward(Vector3(last_player_pos[0], player.position.y+myheight, last_player_pos[1]), delta * (float(AGI)/2))
 		State.CHASING:
 			if global_position.distance_to(player.global_position) > 2.0:
-				var mpos = Vector2(position.x, position.z)
-				var ppos = Vector2(player.tile(player.position.x), player.tile(player.position.z))
+				#var mpos = Vector2(position.x, position.z)
+				#var ppos = Vector2(player.tile(player.position.x), player.tile(player.position.z))
 				if has_line_of_sight(position.x, position.z, player.tile(player.position.x), player.tile(player.position.z)):
-					var path = find_path(mpos, ppos)
-					if path.size() > 0:
-						var next = path[0]
-						global_position = global_position.move_toward(Vector3(next.x, player.position.y+myheight, next.y), delta * (float(AGI)/2))
+					var playerpos = Vector3(player.global_position.x, \
+						myheight+player.global_position.y, player.global_position.z)
+					global_position = global_position.move_toward(playerpos, delta * (float(AGI)/2))
 				if int(global_position.distance_to(player.global_position)) % 2 == 0:
 					texture = _tex_run1
 				else:
 					texture = _tex_run2
-				# TODO: more sophisticated pathfinding algorithm
-				#var playerpos = Vector3(player.global_position.x, \
-				#	myheight+player.global_position.y, player.global_position.z)
-				#global_position = global_position.move_toward(playerpos, delta * (float(AGI)/2))
 			else:
 				state = State.WINDING
 		State.WINDING:
@@ -229,6 +207,30 @@ func _physics_process(delta):
 			if contents.size() == 0:
 				deathtimer -= 1
 				if deathtimer == 0: queue_free()
+
+func _ready() -> void:
+	_tex_idle = load(tex_idle)
+	_tex_run1 = load(tex_run1)
+	_tex_run2 = load(tex_run2)
+	_tex_wind = load(tex_wind)
+	_tex_strike = load(tex_strike)
+	_tex_hit = load(tex_hit)
+	_tex_dead = load(tex_dead)
+		
+	# (CON modifier + 8) * level
+	max_hp = (((CON / 2) - 5) + 8) * level
+	cur_hp = max_hp
+	if INT > 9:
+		max_mp = (INT / 2) + (2 * level)
+		cur_mp = max_mp
+	texture = _tex_idle
+	myheight = texture.get_height() / 200.0
+	if aggressive: state = State.AGGRO
+
+func _physics_process(delta):
+	# check in aggro range and chase player
+	if lifetime % 30: check_ai(delta)
+	lifetime += 1
 	
 	# ensure hp never goes beyond cap
 	if cur_hp > max_hp: cur_hp = max_hp

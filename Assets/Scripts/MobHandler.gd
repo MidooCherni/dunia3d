@@ -3,6 +3,7 @@ extends Node3D
 # contains mob dictionary, handles spawning
 
 @onready var p = $"../Player/PlayerScripting"
+@onready var mapgen = $".."
 
 #	loot groups: if mob drops this loot group, game will roll a dice within it to see which drops
 var lg_lt_weapons = [4, 6, 7]	# low tier weaponry
@@ -56,7 +57,7 @@ var goblin = Creature.new("goblin", 1, Type.HUMANOID, 8, 10, 14, 13, 10, 8, 8, t
 # 		creature list ends
 
 func spawn_light_source(xpos, ypos):
-	var lightfile = preload("res://Assets/lightsource.tscn")
+	var lightfile = preload("res://Assets/Templates/lightsource.tscn")
 	var light = lightfile.instantiate()
 	add_child(light)
 	light.scale = Vector3(1.5, 1.5, 1.5)
@@ -66,22 +67,24 @@ func spawn_light_source(xpos, ypos):
 	
 
 func create_stairs(xpos, ypos):
-	var stair_file = preload("res://Assets/interactable.tscn")
+	var stair_file = preload("res://Assets/Templates/interactable.tscn")
 	var stairs = stair_file.instantiate()
 	var stair_mesh = load("res://Assets/Meshes/Tiles/stairs.blend").instantiate()
-	add_child(stairs)
 	stairs.add_child(stair_mesh)
+	add_child(stairs)
+	mapgen.apply_shader(stairs)
 	stairs.position.x = xpos
 	stairs.position.z = ypos
 	stairs.type = stairs.Kind.STAIRDOWN
 	#TODO: store last room in extra grid list and import/export
 
 func create_door(xpos, ypos, zpos, gridpos, _keyid=0):
-	var door_file = preload("res://Assets/interactable.tscn")
+	var door_file = preload("res://Assets/Templates/interactable.tscn")
 	var door = door_file.instantiate()
 	var door_mesh = load("res://Assets/Meshes/Interactables/door.blend").instantiate()
 	add_child(door)
 	door.add_child(door_mesh)
+	mapgen.apply_shader(door)
 	door.keyid = _keyid
 	door.position.x = xpos
 	door.position.y = ypos
@@ -92,7 +95,7 @@ func create_door(xpos, ypos, zpos, gridpos, _keyid=0):
 	return door
 
 func create_container(droplist, xpos, ypos, zpos, _keyid=0):
-	var chest_file = preload("res://Assets/interactable.tscn")
+	var chest_file = preload("res://Assets/Templates/interactable.tscn")
 	var chest = chest_file.instantiate()
 	var chest_mesh = load("res://Assets/Meshes/Interactables/chest_full.blend").instantiate()
 	add_child(chest)
@@ -107,6 +110,7 @@ func create_container(droplist, xpos, ypos, zpos, _keyid=0):
 		chest.add_child(chest_mesh2)
 	else:
 		chest.roll_contents()
+	mapgen.apply_shader(chest)
 	chest.position.x = xpos
 	chest.position.y = ypos
 	chest.position.z = zpos
@@ -114,7 +118,7 @@ func create_container(droplist, xpos, ypos, zpos, _keyid=0):
 	return chest
 
 func drop(droplist, xpos, ypos, zpos):
-	var mob_file = preload("res://Assets/creature.tscn")
+	var mob_file = preload("res://Assets/Templates/creature.tscn")
 	var mob = mob_file.instantiate()
 	mob.tex_idle = "res://Assets/Textures/itemdrop.png"
 	mob.tex_run1 = "res://Assets/Textures/itemdrop.png"
@@ -133,7 +137,7 @@ func drop(droplist, xpos, ypos, zpos):
 	return mob
 
 func spawn(template_mob:Creature, xpos, ypos, zpos):
-	var mob_file = preload("res://Assets/creature.tscn")
+	var mob_file = preload("res://Assets/Templates/creature.tscn")
 	var mob = mob_file.instantiate()
 	mob.mobname = template_mob.mobname
 	mob.level = template_mob.level

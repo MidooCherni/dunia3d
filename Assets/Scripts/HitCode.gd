@@ -23,6 +23,7 @@ var rng = RandomNumberGenerator.new()
 @onready var p = $"../../Player/PlayerScripting"
 @onready var sfxobj = $WeaponSfx
 @onready var lootholder = $"../Static/Cursor/LootHolder"
+@onready var interlabel = $"../Static/Cursor/LootLabel"
 @onready var mapgen = $"../.."
 
 var sfx_swing = preload("res://Assets/Sounds/combat/swing.wav")
@@ -69,9 +70,10 @@ func strike():
 				else:
 					mob.state = mob.State.STUNNED
 
-func try_display_container():
+func try_interact():
 	var objToLootFrom = null
 	var shouldShowLoot = false
+	interlabel.text = " "
 	var space = cam.get_world_3d().direct_space_state
 	var query = PhysicsRayQueryParameters3D.create(cam.global_position, \
 		cam.global_position - cam.global_transform.basis.z * 3)
@@ -79,6 +81,7 @@ func try_display_container():
 	if collision and collision.collider.name == "StaticBody3D":
 		var obj = collision.collider.get_parent().get_parent().get_parent()
 		if collision.collider.get_parent().get_parent().name in ["chest_full", "chest_empty"]:
+			interlabel.text = "chest"
 			if obj.active == false:
 				if Input.is_action_just_pressed("Activate") and (obj.keyid == 0 or p.Inventory[obj.keyid].qty > 0):
 					obj.active = true
@@ -91,12 +94,19 @@ func try_display_container():
 				objToLootFrom = obj
 				shouldShowLoot = true
 		elif collision.collider.get_parent().get_parent().name == "door":
+			interlabel.text = "door"
 			if Input.is_action_just_pressed("Activate") and (obj.keyid == 0 or p.Inventory[obj.keyid].qty > 0) and !obj.active:
 				obj.value = [100]
 				obj.active = true
 				mapgen.grid[obj.contents[0]][obj.contents[1]] = '.'
 				sfxobj.stream = obj.useSfx
 				sfxobj.play()
+		elif collision.collider.get_parent().get_parent().name == "stairs":
+			interlabel.text = "stairs down"
+			if Input.is_action_just_pressed("Activate") and (obj.keyid == 0 or p.Inventory[obj.keyid].qty > 0) and !obj.active:
+				mapgen.go_down()
+		else:
+			interlabel.text = " "
 	if collision and collision.collider.name == "CreatureCollider":
 		var mob = collision.collider.get_parent()
 		if mob.state == mob.State.DEAD:
@@ -118,7 +128,7 @@ func try_display_container():
 		lootholder.visible = false
 
 func _physics_process(_delta: float) -> void:
-	try_display_container()
+	try_interact()
 	
 	if atkspeedtimer > 0:
 		atkspeedtimer -= 1

@@ -30,14 +30,13 @@
 	(X)     map generation
 	(X)     interactable objects (chests doors)
 	(X)     randomly generated wall decoration
-	( )     floors and floor transition
-	( )     randomly generating enemies in rooms, doodads and goodies
+	(X)     floors and floor transition
+	(X)     randomly generating doodads
+	(X)     randomly generating enemies and goodies
 	( )     stat menu
-	( )     bob and weave
 	( )     maps, loading areas
 	( )     npcs, conversation menus, portraits
 	( )     party members
-	( )     cursor dragging items and clickable paperdoll 
 	( )     character creation, races, classes, starter stats, saving and loading
 	( )     hunger and thirst
 	( )     item description on alt click
@@ -67,4 +66,5 @@
 	( )     no footsteps when jumping
 	( )     overworld travel
 	( )     code cleanup, factorisation into functions, clearer variables, smooth handling
+	( )     bob and weave
 	( )     actual game content

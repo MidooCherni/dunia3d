@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxn247qeyypay"
-path="res://.godot/imported/chest_texOG.png-a5d720dd53fa439afaf07f7dbae0b950.ctex"
+uid="uid://5vppf7johclt"
+path="res://.godot/imported/skullsB.png-790ecd635b84a18b119242f98357ce59.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/MeshUV/chest_texOG.png"
-dest_files=["res://.godot/imported/chest_texOG.png-a5d720dd53fa439afaf07f7dbae0b950.ctex"]
+source_file="res://Assets/Textures/MeshUV/skullsB.png"
+dest_files=["res://.godot/imported/skullsB.png-790ecd635b84a18b119242f98357ce59.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

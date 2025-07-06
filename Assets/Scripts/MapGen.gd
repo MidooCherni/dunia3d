@@ -11,8 +11,9 @@ const FLOOR_MAX_TILES = 64
 var rng = RandomNumberGenerator.new()
 var rooms = []
 var grid = []
+var level = 0
 
-var pixelshader = preload("res://Assets/shader.gdshader")
+var tileshader = preload("res://Assets/Scripts/Shaders/spatial/standard/standard_opaque_repeating.gdshader")
 
 var tiletextures = [
 	preload("res://Assets/Meshes/Tiles/wallblock.blend"),
@@ -21,6 +22,17 @@ var tiletextures = [
 	preload("res://Assets/Meshes/Tiles/wallblockC.blend"),
 	preload("res://Assets/Meshes/Tiles/wallblockD.blend"),
 	preload("res://Assets/Meshes/Tiles/wallblockE.blend")
+]
+
+var doodads = [
+	preload("res://Assets/Meshes/Doodads/barrelA.blend"),
+	preload("res://Assets/Meshes/Doodads/barrelB.blend"),
+	preload("res://Assets/Meshes/Doodads/barrelC.blend"),
+	preload("res://Assets/Meshes/Doodads/barrelD.blend"),
+	preload("res://Assets/Meshes/Doodads/barrelE.blend"),
+	preload("res://Assets/Meshes/Doodads/crateA.blend"),
+	preload("res://Assets/Meshes/Doodads/crateB.blend"),
+	preload("res://Assets/Meshes/Doodads/crateC.blend"),
 ]
 
 func load_from_file():
@@ -90,6 +102,20 @@ class Rect:
 			self.y + self.height <= other.y or
 			self.y >= other.y + other.height
 		)
+		
+func apply_shader(_instance):
+	pass
+	#if instance is MeshInstance3D:
+	#	var mesh = instance.mesh
+	#	if mesh:
+	#		var original_mat = mesh.surface_get_material(0)
+	#		var tex = original_mat.albedo_texture
+	#		var shader_material = ShaderMaterial.new()
+	#		shader_material.shader = tileshader
+	#		shader_material.set_shader_parameter("albedo_texture", tex)
+	#		instance.set_surface_override_material(0, shader_material)
+	#for child in instance.get_children():
+	#	apply_shader(child)
 
 func find_edges():
 	for y in range(1, FLOOR_MAX_TILES-1):
@@ -138,7 +164,6 @@ func generate_lights():
 	for room in rooms:
 		litchance = rng.randi_range(0, 3)
 		if litchance != 0:
-			print("spone light")
 			interholder.spawn_light_source(room.x+(room.width/2), room.y+(room.height/2))
 
 func convert_ascii():
@@ -151,14 +176,13 @@ func convert_ascii():
 			for x in range(room.x, room.x+room.width):
 				if room == rooms[rooms.size()-1] and y == room.y+(room.height/2) and x == room.x+(room.width/2):
 					grid[x][y] = '>'
-					print("spawned door")
 				else:
 					grid[x][y] = '.'
 
 func generate_map():
 	var current_attempt = 0
 	var done_trying = false
-	var num_rooms = rng.randi_range(3, 10)
+	var num_rooms = rng.randi_range(5, 10)
 	for i in range(0, num_rooms):
 		current_attempt = 0
 		done_trying = false
@@ -182,7 +206,9 @@ func generate_map():
 	find_edges()
 	create_corridors()
 	generate_lights()
+	decorate()
 	render_map()
+	populate()
 
 func gen_ground(posx, posy):
 	var tile = null
@@ -190,11 +216,13 @@ func gen_ground(posx, posy):
 	tile = preload("res://Assets/Meshes/Tiles/floorblock.blend")
 	tile_instance = tile.instantiate()
 	world.add_child(tile_instance)
+	apply_shader(tile_instance)
 	tile_instance.position.x = posx*2
 	tile_instance.position.z = posy*2
 	tile = preload("res://Assets/Meshes/Tiles/ceilingblock.blend")
 	tile_instance = tile.instantiate()
 	world.add_child(tile_instance)
+	apply_shader(tile_instance)
 	tile_instance.position.x = posx*2
 	tile_instance.position.z = posy*2
 	tile_instance.position.y = 1
@@ -205,9 +233,40 @@ func gen_ceiling(posx, posy):
 	tile = preload("res://Assets/Meshes/Tiles/ceilingblock.blend")
 	tile_instance = tile.instantiate()
 	world.add_child(tile_instance)
+	apply_shader(tile_instance)
 	tile_instance.position.x = posx*2
 	tile_instance.position.z = posy*2
 	tile_instance.position.y = 1
+
+func decorate():
+	var ran = 0
+	var tile = null
+	var tile_instance = null
+	for y in range(1, FLOOR_MAX_TILES-1):
+		for x in range(1, FLOOR_MAX_TILES-1):
+			if grid[x][y] == '.':
+				if (grid[x+1][y] == '#' and grid[x-1][y] == '.') or (grid[x-1][y] == '#' and grid[x+1][y] == '.') or \
+				(grid[x][y-1] == '#' and grid[x][y+1] == '.') or (grid[x][y+1] == '#' and grid[x][y-1] == '.'):
+					ran = randi_range(0, 4)
+					if ran == 0:
+						ran = randi_range(0, doodads.size()-1)
+						tile = doodads[ran]
+						tile_instance = tile.instantiate()
+						world.add_child(tile_instance)
+						apply_shader(tile_instance)
+						tile_instance.position.x = x*2
+						tile_instance.position.z = y*2
+
+func populate():
+	var ran = 0
+	for room in rooms:
+		if room != rooms[0]:
+			for y in range(room.y+1, room.y+room.height-1):
+				for x in range(room.x+1, room.x+room.width-1):
+					ran = randi_range(0, 10)
+					if ran == 0:	# TODO: RNG A CREATURE
+						interholder.spawn(interholder.goblin, x*2, 0, y*2)
+						print("spone a guy at " + str(x*2) + ", " + str(y*2))
 
 func render_map():
 	for y in range(0, FLOOR_MAX_TILES):
@@ -227,6 +286,7 @@ func render_map():
 					if tiletype in range(19,32): tile = tiletextures[5]
 					tile_instance = tile.instantiate()
 					world.add_child(tile_instance)
+					apply_shader(tile_instance)
 					tile_instance.position.x = x*2
 					tile_instance.position.z = y*2
 				'.':
@@ -236,6 +296,7 @@ func render_map():
 					tile = preload("res://Assets/Meshes/Tiles/gate.blend")
 					tile_instance = tile.instantiate()
 					world.add_child(tile_instance)
+					apply_shader(tile_instance)
 					tile_instance.position.x = x*2
 					tile_instance.position.z = y*2
 					if rng.randi_range(0, 1) == 0:
@@ -247,6 +308,7 @@ func render_map():
 					tile = preload("res://Assets/Meshes/Tiles/gate.blend")
 					tile_instance = tile.instantiate()
 					world.add_child(tile_instance)
+					apply_shader(tile_instance)
 					tile_instance.position.x = x*2
 					tile_instance.position.z = y*2
 					tile_instance.set_rotation_degrees(Vector3(0, 90, 0))
@@ -258,6 +320,22 @@ func render_map():
 				'>':
 					gen_ceiling(x, y)
 					interholder.create_stairs(x*2, y*2)
+
+func clear_map():
+	grid = []
+	rooms = []
+	for thing in world.get_children():
+		thing.queue_free()
+	for unit in interholder.get_children():
+		unit.queue_free()
+
+func go_down():
+	# TODO: difficulty calculation
+	level += 1
+	clear_map()
+	generate_map()
+	p.position.x = rooms[0].x*2 + rooms[0].width
+	p.position.z = rooms[0].y*2 + rooms[0].height
 
 # URGENT TODO: example
 func _ready() -> void:

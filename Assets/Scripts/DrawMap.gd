@@ -13,13 +13,13 @@ func draw_map(gridfile):
 				' ':
 					image.set_pixel(x, y, Color(0, 0, 0, 0.5)) # black
 				'#':
-					image.set_pixel(x, y, Color(0.7, 0.35, 0, 1)) # brown
+					image.set_pixel(x, y, Color(0.4, 0.4, 0.4, 1)) # lgrey
 				'-', '|':
-					image.set_pixel(x, y, Color(0, 1, 0, 1)) # green
+					image.set_pixel(x, y, Color(0.7, 0.35, 0, 1)) # brown
 				'.':
-					image.set_pixel(x, y, Color(0.3, 0.3, 0.3, 1)) # grey
+					image.set_pixel(x, y, Color(0.2, 0.2, 0.2, 1)) # dgrey
 				'>':
-					image.set_pixel(x, y, Color(1, 0.25, 0.5, 1)) # pink
+					image.set_pixel(x, y, Color(0.75, 0.25, 0.5, 1)) # pink
 					#image.set_pixel(x, y, Color(1, 0.5, 0, 1)) # brown
 	if p.position.x > 0 and p.position.x < 128 and p.position.z > 0 and p.position.z < 128:
 		image.set_pixel(p.tile(p.position.x)/2, p.tile(p.position.z)/2, Color(1, 0, 0, 1)) # red

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxn247qeyypay"
-path="res://.godot/imported/chest_texOG.png-a5d720dd53fa439afaf07f7dbae0b950.ctex"
+uid="uid://dqjsia18sj02w"
+path="res://.godot/imported/barrel.png-cc31a627e75880d4dc7a3cf601aecc59.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/MeshUV/chest_texOG.png"
-dest_files=["res://.godot/imported/chest_texOG.png-a5d720dd53fa439afaf07f7dbae0b950.ctex"]
+source_file="res://Assets/Textures/MeshUV/barrel.png"
+dest_files=["res://.godot/imported/barrel.png-cc31a627e75880d4dc7a3cf601aecc59.ctex"]
 
 [params]
 

@@ -19,7 +19,7 @@ var rng = RandomNumberGenerator.new()
 
 enum State{
 	IDLE, STUNNED, ASLEEP, DEAD
-}	# TODO: clean up useless dogshit enum i made for the express purpose of tricking spell code	
+}	# TODO: clean up useless dogshit enum i made for the express purpose of tricking spell code
 var state = State.IDLE
 
 	# ------------------------------------------------------------------------------------- MAGIC
