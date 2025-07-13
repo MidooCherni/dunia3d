@@ -4,7 +4,8 @@ extends Control
 @onready var buttchar = $ButtChar
 @onready var buttskills = $ButtSkills
 @onready var frameinv = $FrameInventory
-@onready var framechar = $FrameCharSkills
+@onready var framechar = $FrameChar
+@onready var frameskills = $FrameSkills
 @onready var equipslots = $EquipSlots
 
 @onready var player = $"../../Player"
@@ -27,16 +28,17 @@ func _ready() -> void:
 	buttskills.visible = false
 	frameinv.visible = false
 	framechar.visible = false
+	frameskills.visible = false
 	equipslots.visible = false
 
 func _physics_process(_delta: float) -> void:
 	invhandler.render()
 	labelvisible = false
 	for i in range(0, 42):
-		if buttonfather.get_child(i).is_hovered:
+		if buttonfather.get_child(i).is_being_hovered:
 			labelvisible = true
 	for i in range(0, 11):
-		if equipbuttonfather.get_child(i).is_hovered:
+		if equipbuttonfather.get_child(i).is_being_hovered:
 			labelvisible = true
 	cursorlabel.visible = labelvisible
 	if Input.is_action_just_pressed("Menu"):
@@ -51,6 +53,7 @@ func _physics_process(_delta: float) -> void:
 			equipslots.visible = true
 			frameinv.visible = true
 			framechar.visible = false
+			frameskills.visible = false
 		else:
 			window = WindowType.NONE
 			player.mousecap = true
@@ -61,3 +64,4 @@ func _physics_process(_delta: float) -> void:
 			buttskills.visible = false
 			frameinv.visible = false
 			framechar.visible = false
+			frameskills.visible = false

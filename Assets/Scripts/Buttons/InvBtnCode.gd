@@ -5,10 +5,10 @@ extends Button
 @onready var textlabel = $"../../../CursorLabel"
 @onready var menuhandler = $"../../.."
 var itemid = -1
-var is_hovered = false
+var is_being_hovered = false
 
 func _pressed():
-	is_hovered = false
+	is_being_hovered = false
 	if get_parent().name == "InvButtCont":
 		playerscript.use_item(itemid)
 		itemid = -1
@@ -22,8 +22,8 @@ func _process(_delta):
 			get_viewport().get_mouse_position().x <= global_position.x+48 and get_viewport().get_mouse_position().y <= global_position.y+48:
 				textlabel.set_global_position(get_viewport().get_mouse_position())
 				textlabel.text = "  " + playerscript.Inventory[itemid].objname
-				is_hovered = true
+				is_being_hovered = true
 			else:
-				is_hovered = false
+				is_being_hovered = false
 		else:
-			is_hovered = false
+			is_being_hovered = false

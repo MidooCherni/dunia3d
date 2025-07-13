@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://yk51emk7n13i"]
+[gd_scene load_steps=45 format=3 uid="uid://yk51emk7n13i"]
 
 [ext_resource type="Texture2D" uid="uid://dk3qectku48uh" path="res://Assets/Textures/grass.jpg" id="1_c5ube"]
 [ext_resource type="Script" path="res://Assets/Scripts/MapGen.gd" id="1_hlgrj"]
@@ -29,7 +29,6 @@
 [ext_resource type="Texture2D" uid="uid://bpwyael5v2krk" path="res://Assets/Textures/UI/character.png" id="19_idjvl"]
 [ext_resource type="Script" path="res://Assets/Scripts/Buttons/ButtChar.gd" id="20_am7sb"]
 [ext_resource type="Texture2D" uid="uid://bt270lnnj0oqw" path="res://Assets/Textures/UI/skills.png" id="20_qsr5w"]
-[ext_resource type="Texture2D" uid="uid://doblyn7haymek" path="res://Assets/Textures/UI/status.png" id="22_uccjl"]
 [ext_resource type="Script" path="res://Assets/Scripts/Buttons/ButtSkills.gd" id="23_1ng6e"]
 [ext_resource type="Texture2D" uid="uid://dhdv5fbrse03u" path="res://Assets/Textures/UI/frame.png" id="26_5ak6v"]
 [ext_resource type="Texture2D" uid="uid://bamrtawa58hc0" path="res://Assets/Textures/Icons/empty.png" id="26_g2fsw"]
@@ -1944,7 +1943,6 @@ text_direction = 2
 
 [node name="Paperdoll" type="TextureRect" parent="UI/Menus/FrameInventory"]
 z_index = -1
-layout_mode = 0
 offset_left = 1150.0
 offset_top = 354.0
 offset_right = 1233.0
@@ -1953,8 +1951,6 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("26_5ak6v")
 
 [node name="FrameChar" type="TextureRect" parent="UI/Menus"]
-visible = false
-layout_mode = 0
 offset_top = 100.0
 offset_right = 1920.0
 offset_bottom = 1180.0
@@ -1963,9 +1959,8 @@ texture = ExtResource("17_iy6a3")
 
 [node name="Nameplate1" type="Label" parent="UI/Menus/FrameChar"]
 z_index = 2
-layout_mode = 0
-offset_left = 595.0
-offset_top = 309.0
+offset_left = 600.0
+offset_top = 310.0
 offset_right = 1022.0
 offset_bottom = 691.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -1976,25 +1971,24 @@ theme_override_font_sizes/font_size = 24
 text = "username
 nnth level racename classname
 
-    Strength: 
+Strength: 
 
-    Constitution:
+Constitution:
 
-    Dexterity:
+Dexterity:
 
-    Agility: 
+Agility: 
 
-    Intelligence: 
+Intelligence: 
 
-    Wisdom: 
+Wisdom: 
 
-    Charisma: "
+Charisma: "
 vertical_alignment = 2
 
 [node name="Nameplate2" type="Label" parent="UI/Menus/FrameChar"]
 z_index = 2
-layout_mode = 0
-offset_left = 828.0
+offset_left = 810.0
 offset_top = 286.0
 offset_right = 1228.0
 offset_bottom = 691.0
@@ -2015,19 +2009,18 @@ Fire Resist:
 
 Frost Resist: 
 
-Shadow Resist: 
-
 Nature Resist: 
+
+Shadow Resist: 
 
 Magic Resist: "
 vertical_alignment = 2
 
 [node name="Statnums1" type="Label" parent="UI/Menus/FrameChar"]
 z_index = 2
-layout_mode = 0
 offset_left = 543.0
 offset_top = 286.0
-offset_right = 792.0
+offset_right = 768.0
 offset_bottom = 691.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -2052,10 +2045,9 @@ vertical_alignment = 2
 
 [node name="Statnums2" type="Label" parent="UI/Menus/FrameChar"]
 z_index = 2
-layout_mode = 0
 offset_left = 938.0
 offset_top = 286.0
-offset_right = 1014.0
+offset_right = 1000.0
 offset_bottom = 691.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -2078,146 +2070,8 @@ text = "255
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="Values" type="Label" parent="UI/Menus/FrameChar"]
-z_index = 2
-layout_mode = 0
-offset_left = 19.0
-offset_top = 865.0
-offset_right = 319.0
-offset_bottom = 956.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_constants/shadow_outline_size = 16
-theme_override_font_sizes/font_size = 32
-text = "n/n
-n/n
-n/n"
-horizontal_alignment = 1
-vertical_alignment = 2
-
-[node name="Emojis" type="Label" parent="UI/Menus/FrameChar"]
-z_index = 2
-layout_mode = 0
-offset_left = 588.0
-offset_top = 382.0
-offset_right = 620.0
-offset_bottom = 714.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_constants/shadow_outline_size = 16
-theme_override_font_sizes/font_size = 22
-horizontal_alignment = 1
-
-[node name="EmoStr" type="Label" parent="UI/Menus/FrameChar/Emojis"]
-z_index = 2
-layout_mode = 0
-offset_left = 5.0
-offset_top = -1.0
-offset_right = 36.0
-offset_bottom = 325.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_constants/shadow_outline_size = 16
-theme_override_font_sizes/font_size = 22
-text = "💪"
-horizontal_alignment = 1
-
-[node name="EmoCon" type="Label" parent="UI/Menus/FrameChar/Emojis"]
-z_index = 2
-layout_mode = 0
-offset_left = -1.0
-offset_top = 49.0
-offset_right = 43.0
-offset_bottom = 95.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_constants/shadow_outline_size = 16
-theme_override_font_sizes/font_size = 22
-text = "🛡️"
-horizontal_alignment = 1
-
-[node name="EmoDex" type="Label" parent="UI/Menus/FrameChar/Emojis"]
-z_index = 2
-layout_mode = 0
-offset_left = 5.0
-offset_top = 95.0
-offset_right = 39.0
-offset_bottom = 159.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_constants/shadow_outline_size = 16
-theme_override_font_sizes/font_size = 22
-text = "✋"
-horizontal_alignment = 1
-
-[node name="EmoAgi" type="Label" parent="UI/Menus/FrameChar/Emojis"]
-z_index = 2
-layout_mode = 0
-offset_left = 3.0
-offset_top = 146.0
-offset_right = 37.0
-offset_bottom = 235.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_constants/shadow_outline_size = 16
-theme_override_font_sizes/font_size = 22
-text = "🦶"
-horizontal_alignment = 1
-
-[node name="EmoInt" type="Label" parent="UI/Menus/FrameChar/Emojis"]
-z_index = 2
-layout_mode = 0
-offset_left = 4.0
-offset_top = 192.0
-offset_right = 38.0
-offset_bottom = 277.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_constants/shadow_outline_size = 16
-theme_override_font_sizes/font_size = 22
-text = "📖"
-horizontal_alignment = 1
-
-[node name="EmoWis" type="Label" parent="UI/Menus/FrameChar/Emojis"]
-z_index = 2
-layout_mode = 0
-offset_left = 2.0
-offset_top = 241.0
-offset_right = 39.0
-offset_bottom = 295.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_constants/shadow_outline_size = 16
-theme_override_font_sizes/font_size = 22
-text = "🧠"
-horizontal_alignment = 1
-
-[node name="EmoCha" type="Label" parent="UI/Menus/FrameChar/Emojis"]
-z_index = 2
-layout_mode = 0
-offset_left = 4.0
-offset_top = 286.0
-offset_right = 38.0
-offset_bottom = 309.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_constants/shadow_outline_size = 16
-theme_override_font_sizes/font_size = 22
-text = "👄"
-horizontal_alignment = 1
-
 [node name="Paperdoll" type="TextureRect" parent="UI/Menus/FrameChar"]
 z_index = -1
-layout_mode = 0
 offset_left = 1150.0
 offset_top = 354.0
 offset_right = 1233.0
@@ -2227,143 +2081,14 @@ texture = ExtResource("26_5ak6v")
 
 [node name="FrameSkills" type="TextureRect" parent="UI/Menus"]
 visible = false
-layout_mode = 0
 offset_top = 100.0
 offset_right = 1920.0
 offset_bottom = 1180.0
 mouse_filter = 2
-texture = ExtResource("22_uccjl")
-
-[node name="SkillLabels1" type="Label" parent="UI/Menus/FrameSkills"]
-z_index = 2
-layout_mode = 0
-offset_left = 585.0
-offset_top = 304.0
-offset_right = 1022.0
-offset_bottom = 1371.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_constants/shadow_outline_size = 16
-theme_override_font_sizes/font_size = 18
-text = "💪 Athletics
-⠀
-🛡️ Concentration
-🛡️ Smithing
-⠀
-✋ Instruments
-✋ Jewelcrafting
-✋ Leatherworking
-✋ Lockpicking
-✋ Sleight of Hand
-✋ Trapmaking
-✋ Weaving
-⠀
-🦶 Acrobacy
-🦶 Dancing
-🦶 Escapism
-🦶 Hiding
-🦶 Riding
-🦶 Sneaking
-"
-
-[node name="SkillLabels2" type="Label" parent="UI/Menus/FrameSkills"]
-z_index = 2
-layout_mode = 0
-offset_left = 845.0
-offset_top = 304.0
-offset_right = 1022.0
-offset_bottom = 723.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_constants/shadow_outline_size = 16
-theme_override_font_sizes/font_size = 18
-text = "📖 Alchemy
-📖 Cooking 
-📖 Disable Device
-📖 Lore
-📖 Nature
-📖 Nursing
-📖 Use Magic Device
-
-🧠 Animal Handling
-🧠 Judgement
-🧠 Listening
-🧠 Searching
-
-👄 Bluffing
-👄 Diplomacy
-👄 Intimidation
-👄 Performance "
-
-[node name="SkillValues1" type="Label" parent="UI/Menus/FrameSkills"]
-z_index = 2
-layout_mode = 0
-offset_left = 695.0
-offset_top = 307.0
-offset_right = 816.0
-offset_bottom = 740.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_constants/shadow_outline_size = 16
-theme_override_font_sizes/font_size = 19
-text = "0
-⠀
-0
-0
-⠀
-0
-0
-0
-0
-0
-0
-0
-⠀
-0
-0
-0
-0
-0
-0"
-horizontal_alignment = 2
-
-[node name="SkillValues2" type="Label" parent="UI/Menus/FrameSkills"]
-z_index = 2
-layout_mode = 0
-offset_left = 805.0
-offset_top = 303.0
-offset_right = 1071.0
-offset_bottom = 740.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_constants/shadow_outline_size = 16
-theme_override_font_sizes/font_size = 20
-text = "0
-0
-0
-0
-0
-0
-0
-
-0
-0
-0
-0
-
-0
-0
-0
-0"
-horizontal_alignment = 2
+texture = ExtResource("17_iy6a3")
 
 [node name="Paperdoll" type="TextureRect" parent="UI/Menus/FrameSkills"]
 z_index = -1
-layout_mode = 0
 offset_left = 1150.0
 offset_top = 354.0
 offset_right = 1233.0

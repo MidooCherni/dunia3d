@@ -167,6 +167,9 @@ func spawn(template_mob:Creature, xpos, ypos, zpos):
 	mob.position.x = xpos
 	mob.position.y = ypos + (float(load(mob.tex_idle).get_height()) / 200.0)
 	mob.position.z = zpos
+	mob.spawnx = xpos
+	mob.spawny = ypos + (float(load(mob.tex_idle).get_height()) / 200.0)
+	mob.spawnz = zpos
 	return mob
 
 func _ready():

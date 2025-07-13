@@ -2,14 +2,18 @@
 
 [ext_resource type="Script" path="res://Assets/Scripts/MobScript.gd" id="1_ayblg"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_8m3xc"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_lgpo7"]
 
-[node name="Creature" type="Sprite3D"]
-billboard = 2
-texture_filter = 4
+[node name="Creature" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_ayblg")
 
-[node name="CreatureCollider" type="CSGMesh3D" parent="."]
-transparency = 1.0
-use_collision = true
-mesh = SubResource("CapsuleMesh_8m3xc")
+[node name="CreatureSprite" type="Sprite3D" parent="."]
+billboard = 2
+shaded = true
+texture_filter = 0
+
+[node name="CreatureCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_lgpo7")

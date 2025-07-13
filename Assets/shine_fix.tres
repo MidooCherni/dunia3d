@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://ci3mn1d6hrq4u"]
+
+[resource]
+cull_mode = 2
+shading_mode = 2
+metallic_specular = 0.0
+texture_filter = 0

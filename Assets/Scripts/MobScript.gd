@@ -1,4 +1,4 @@
-extends Sprite3D
+extends CharacterBody3D
 
 #	tip: a creature will always load their own palette using their mobname
 
@@ -26,6 +26,10 @@ var attacktimerMax = 15
 var freezetimer = 0
 var freezetimerMax = 10
 var deathtimer = 30
+
+var spawnx = 0
+var spawny = 0
+var spawnz = 0
 
 var lifetime = 0
 
@@ -126,84 +130,82 @@ func find_path(start_world, goal_world):
 		path.remove_at(0)
 	return path
 
-func has_line_of_sight(wx0, wy0, wx1, wy1):
-	var x0 = int(wx0 / 2)
-	var y0 = int(wy0 / 2)
-	var x1 = int(wx1 / 2)
-	var y1 = int(wy1 / 2)
-	var dx = abs(x1 - x0)
-	var dy = abs(y1 - y0)
-	var sx = -1
-	if x0 < x1: sx = 1
-	var sy = -1
-	if y0 < y1: sy = 1
-	var err = dx - dy
-	while true:
-		if mapgen.grid[x0][y0] != '.':
-			return false
-		if x0 == x1 and y0 == y1:
-			break
-		var e2 = 2 * err
-		if e2 > -dy:
-			err -= dy
-			x0 += sx
-		if e2 < dx:
-			err += dx
-			y0 += sy
-	return true
+func has_line_of_sight():
+	var space_state = get_world_3d().direct_space_state
+	var from = global_transform.origin
+	var to = player.global_transform.origin
+	var params = PhysicsRayQueryParameters3D.new()
+	params.from = global_transform.origin + Vector3.UP
+	params.to = player.global_transform.origin
+	params.collision_mask = 1
+	params.exclude = [] 
+	var result = space_state.intersect_ray(params)
+	if result and result.collider.name == "Player":
+		return true
+	return false
 	
-#etc
+# worthless shitty spaghetti code as a consequence of my own retarded decisions
+func chase_player():
+	var to_player = player.global_transform.origin - global_transform.origin
+	var direction = to_player.normalized()
+	# Apply horizontal movement
+	velocity.x = direction.x * AGI/2
+	velocity.z = direction.z * AGI/2
+	move_and_slide()
+
+func go_home():
+	pass
 
 func check_ai(delta):
 	match state:
 		State.AGGRO:
-			if global_position.distance_to(player.global_position) <= 20.0:
+			if has_line_of_sight() and global_position.distance_to(player.global_position) <= 15.0:
 				# TODO: check not rooted or stunned
-				if has_line_of_sight(position.x, position.z, player.tile(player.position.x), player.tile(player.position.z)):
-					last_player_pos = [player.tile(player.position.x), player.tile(player.position.z)]
-					state = State.CHASING
-				elif last_player_pos != null:
-					global_position = global_position.move_toward(Vector3(last_player_pos[0], player.position.y+myheight, last_player_pos[1]), delta * (float(AGI)/2))
+				state = State.CHASING
+			else:
+				go_home()
+				global_position = global_position.move_toward(Vector3(spawnx, spawny, spawnz), delta * (float(AGI)/4))
 		State.CHASING:
 			if global_position.distance_to(player.global_position) > 2.0:
 				#var mpos = Vector2(position.x, position.z)
 				#var ppos = Vector2(player.tile(player.position.x), player.tile(player.position.z))
-				if has_line_of_sight(position.x, position.z, player.tile(player.position.x), player.tile(player.position.z)):
-					var playerpos = Vector3(player.global_position.x, \
-						myheight+player.global_position.y, player.global_position.z)
-					global_position = global_position.move_toward(playerpos, delta * (float(AGI)/2))
-				if int(global_position.distance_to(player.global_position)) % 2 == 0:
-					texture = _tex_run1
+				if has_line_of_sight() and global_position.distance_to(player.global_position) <= 15.0:
+					chase_player()
 				else:
-					texture = _tex_run2
+					state = State.AGGRO
+				if int(global_position.distance_to(player.global_position)) % 2 == 0:
+					get_child(0).texture = _tex_run1
+				else:
+					get_child(0).texture = _tex_run2
 			else:
 				state = State.WINDING
 		State.WINDING:
-			texture = _tex_wind
+			get_child(0).texture = _tex_wind
 			attacktimer += 1
 			if attacktimer >= attacktimerMax:
 				attacktimer = 0
 				#	damage formula here
 				if global_position.distance_to(player.global_position) <= 2.0:
-					var damage = ((STR / 2) - 5) + (rng.randi_range(dmgA, dmgA*dmgB) + dmgC) - playerStats.armor
+					var damage = (int(float(STR - 10) / 2.0)) + (rng.randi_range(dmgA, dmgA*dmgB) + dmgC) - playerStats.armor
 					if damage >= 0:
 						playerStats.cur_hp -= damage
 						paincode.alph = 1.0
 				state = State.RECOVERING
 		State.RECOVERING:
-			texture = _tex_strike
+			get_child(0).texture = _tex_strike
 			attacktimer += 1
 			if attacktimer >= attacktimerMax*4:
 				attacktimer = 0
 				state = State.AGGRO
 		State.STUNNED:
-			texture = _tex_hit
+			get_child(0).texture = _tex_hit
 			freezetimer += 1
 			if freezetimer >= freezetimerMax:
 				freezetimer = 0
+				get_child(0).texture = _tex_idle
 				state = State.AGGRO
 		State.DEAD:
-			texture = _tex_dead
+			get_child(0).texture = _tex_dead
 			if contents.size() == 0:
 				deathtimer -= 1
 				if deathtimer == 0: queue_free()
@@ -223,8 +225,8 @@ func _ready() -> void:
 	if INT > 9:
 		max_mp = (INT / 2) + (2 * level)
 		cur_mp = max_mp
-	texture = _tex_idle
-	myheight = texture.get_height() / 200.0
+	get_child(0).texture = _tex_idle
+	myheight = get_child(0).texture.get_height() / 200.0
 	if aggressive: state = State.AGGRO
 
 func _physics_process(delta):

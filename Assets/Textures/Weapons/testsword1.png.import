@@ -2,25 +2,25 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwgpd76lbsoy2"
-path="res://.godot/imported/wall_stone.png-aa085bf06a3c3c84290266f9a7e304ab.ctex"
+uid="uid://c30p2v0t5kr0t"
+path="res://.godot/imported/testsword1.png-6d844dbd3427b9614ab9c0b86815a220.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/MeshUV/wall_stone.png"
-dest_files=["res://.godot/imported/wall_stone.png-aa085bf06a3c3c84290266f9a7e304ab.ctex"]
+source_file="res://Assets/Textures/Weapons/testsword1.png"
+dest_files=["res://.godot/imported/testsword1.png-6d844dbd3427b9614ab9c0b86815a220.ctex"]
 
 [params]
 
 compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
-compress/hdr_compression=0
+compress/hdr_compression=1
 compress/normal_map=0
-compress/channel_pack=1
+compress/channel_pack=0
 mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

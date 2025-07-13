@@ -62,7 +62,46 @@ var race = Race.DEBUG
 var job = Class.DEBUG
 
 var worn_items = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-	
+
+# str
+var skillAthletics = 0
+# con
+var skillConcentration = 0
+var skillCraftSmithing = 0
+# dex
+var skillMusicianship = 0
+var skillCraftJewelcrafting = 0
+var skillCraftLeatherworking = 0
+var skillOpenLock = 0
+var skillSleightofHand = 0
+var skillCraftTraps = 0
+var skillCraftWeaving = 0
+# agi
+var skillAcrobacy = 0
+var skillPerformDance = 0
+var skillEscape = 0
+var skillHide = 0
+var skillRide = 0
+var skillMoveSilently = 0
+# int
+var skillCraftAlchemy = 0
+var skillCraftCooking = 0
+var skillDisableDevice = 0
+var skillKnowledgeLore = 0
+var skillKnowledgeNature = 0
+var skillNurse = 0
+var skillUseMagicDevice = 0
+# wis
+var skillHandleAnimal = 0
+var skillJudge = 0
+var skillListen = 0
+var skillSearch = 0
+# cha
+var skillBluff = 0
+var skillDiplomacy = 0
+var skillIntimidate = 0
+var skillPerform = 0
+
 func _process(_delta):
 	# ensure hp never goes beyond cap
 	if cur_hp > max_hp: cur_hp = max_hp

@@ -33,6 +33,10 @@ var doodads = [
 	preload("res://Assets/Meshes/Doodads/crateA.blend"),
 	preload("res://Assets/Meshes/Doodads/crateB.blend"),
 	preload("res://Assets/Meshes/Doodads/crateC.blend"),
+	preload("res://Assets/Meshes/Doodads/decoration.tscn"),
+	preload("res://Assets/Meshes/Doodads/decoration.tscn"),
+	preload("res://Assets/Meshes/Doodads/decoration.tscn"),
+	preload("res://Assets/Meshes/Doodads/decoration.tscn"),
 ]
 
 func load_from_file():
@@ -103,19 +107,18 @@ class Rect:
 			self.y >= other.y + other.height
 		)
 		
-func apply_shader(_instance):
-	pass
-	#if instance is MeshInstance3D:
-	#	var mesh = instance.mesh
-	#	if mesh:
-	#		var original_mat = mesh.surface_get_material(0)
-	#		var tex = original_mat.albedo_texture
-	#		var shader_material = ShaderMaterial.new()
-	#		shader_material.shader = tileshader
-	#		shader_material.set_shader_parameter("albedo_texture", tex)
-	#		instance.set_surface_override_material(0, shader_material)
-	#for child in instance.get_children():
-	#	apply_shader(child)
+func apply_shader(instance):
+	if instance is MeshInstance3D:
+		var mesh = instance.mesh
+		if mesh:
+			var original_mat = mesh.surface_get_material(0)
+			var tex = original_mat.get("albedo_texture")
+			var mat = load("res://Assets/shine_fix.tres").duplicate()
+			mat.set("albedo_texture", tex)
+			mesh.surface_set_material(0, load("res://Assets/shine_fix.tres"))
+			mesh.surface_set_material(0, mat)
+	for child in instance.get_children():
+		apply_shader(child)
 
 func find_edges():
 	for y in range(1, FLOOR_MAX_TILES-1):
@@ -266,7 +269,6 @@ func populate():
 					ran = randi_range(0, 10)
 					if ran == 0:	# TODO: RNG A CREATURE
 						interholder.spawn(interholder.goblin, x*2, 0, y*2)
-						print("spone a guy at " + str(x*2) + ", " + str(y*2))
 
 func render_map():
 	for y in range(0, FLOOR_MAX_TILES):

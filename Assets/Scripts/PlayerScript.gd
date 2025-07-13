@@ -267,7 +267,7 @@ func resolve_spell_effects(spellobj):
 				var query = PhysicsRayQueryParameters3D.create(cam.global_position, \
 					cam.global_position - cam.global_transform.basis.z * attack_range)
 				var collision = space.intersect_ray(query)
-				if collision and collision.collider.name == "CreatureCollider":
+				if collision and collision.collider.name == "CreatureRigidbody":
 					#	TODO: damage function
 					var mob = collision.collider.get_parent()
 					if mob.state != mob.State.DEAD:
@@ -357,23 +357,17 @@ func _ready():	# TODO: use database system to import items
 	Inventory.append(Item.new("rock.png", "offhand test rock", ItemType.ARMOR, Subtype.OFFHAND, "ambidexterity test", 0, 1))
 	Inventory.append(Item.new("bow.png", "test bow", ItemType.WEAPON, Subtype.RANGE, "shoots gay ass little arrows etc.", 0, 2, [1, 6, 0]))
 	Inventory.append(Item.new("redlean.png", "potion of healean", ItemType.CONSUMABLE, Subtype.POTION, "heals you", 0, 0, 0, 0, 0, potionheal))
+	Inventory.append(Item.new("testsword.png", "test sword", ItemType.WEAPON, Subtype.ONESLASH, "slash slash", 0, 1, [1, 10, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0 ,0 ,0 ,0]))
 	#			item list ends here
-	Inventory[0].qty = 1 # TODO debug inventory, remove later
-	Inventory[1].qty = 2
-	Inventory[2].qty = 1
-	Inventory[3].qty = 4
-	Inventory[4].qty = 1
-	Inventory[5].qty = 2
-	Inventory[6].qty = 3
-	Inventory[7].qty = 1
-	Inventory[8].qty = 2
+	Inventory[0].qty = 43 # TODO debug inventory, remove later
+	Inventory[9].qty = 1
 
 	# TODO: fix debug values to scale off enum
 	var per_level_hp = 1
-	if job in [Class.FIGHTER, Class.SAVAGE, Class.MONK, Class.SPELLSWORD, Class.INQUISITOR, Class.TEMPLAR, Class.STORMLORD, Class.WARLORD, Class.MOONKNIGHT, Class.REAPER]:
-		per_level_hp = get_race_dice()
-	else:
-		per_level_hp = rng.randi_range(1, get_race_dice())
+	#if job in [Class.FIGHTER, Class.SAVAGE, Class.MONK, Class.SPELLSWORD, Class.INQUISITOR, Class.TEMPLAR, Class.STORMLORD, Class.WARLORD, Class.MOONKNIGHT, Class.REAPER]:
+	per_level_hp = get_race_dice()
+	#else:
+	#		per_level_hp = rng.randi_range(1, get_race_dice())
 	max_hp = (per_level_hp + ((CON / 2) - 5)) * level
 	cur_hp = max_hp
 	max_mp = (INT / 2) + (2 * level)

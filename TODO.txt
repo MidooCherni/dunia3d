@@ -33,8 +33,9 @@
 	(X)     floors and floor transition
 	(X)     randomly generating doodads
 	(X)     randomly generating enemies and goodies
-	( )     stat menu
-	( )     maps, loading areas
+	(X)     rework mob chase code
+	(X)     stat menu
+	( )     maps, loading areas 
 	( )     npcs, conversation menus, portraits
 	( )     party members
 	( )     character creation, races, classes, starter stats, saving and loading

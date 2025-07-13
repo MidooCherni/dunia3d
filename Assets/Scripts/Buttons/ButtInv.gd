@@ -13,4 +13,5 @@ func _pressed():
 	menu.buttskills.self_modulate.a = 1.0
 	menu.frameinv.visible = true
 	menu.framechar.visible = false
+	menu.frameskills.visible = false
 	invhandler.render()

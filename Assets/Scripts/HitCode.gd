@@ -48,9 +48,9 @@ func strike():
 	var query = PhysicsRayQueryParameters3D.create(cam.global_position, \
 		cam.global_position - cam.global_transform.basis.z * attack_range)
 	var collision = space.intersect_ray(query)
-	if collision and collision.collider.name == "CreatureCollider":
+	if collision and collision.collider is CharacterBody3D:
 		#	TODO: damage function
-		var mob = collision.collider.get_parent()
+		var mob = collision.collider
 		match hit_type:
 			0:
 				sfxobj.stream = sfx_punch
@@ -107,8 +107,8 @@ func try_interact():
 				mapgen.go_down()
 		else:
 			interlabel.text = " "
-	if collision and collision.collider.name == "CreatureCollider":
-		var mob = collision.collider.get_parent()
+	if collision and collision.collider is CharacterBody3D:
+		var mob = collision.collider
 		if mob.state == mob.State.DEAD:
 			if mob.contents.size() > 0:
 				objToLootFrom = mob 

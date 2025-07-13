@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://t0bw3c8lvgrq"]
+
+[ext_resource type="Texture2D" uid="uid://bf14damyu4sxn" path="res://Assets/Textures/MeshUV/skulls.png" id="1_8htiw"]
+[ext_resource type="Script" path="res://Assets/Scripts/MapDeco.gd" id="1_n06tt"]
+
+[node name="Decoration" type="Sprite3D"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+centered = false
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("1_8htiw")
+script = ExtResource("1_n06tt")
